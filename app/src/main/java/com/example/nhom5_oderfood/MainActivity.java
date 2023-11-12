@@ -12,5 +12,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //quang comment
         //quang comment2
+        //khiem comment
     }
 }
