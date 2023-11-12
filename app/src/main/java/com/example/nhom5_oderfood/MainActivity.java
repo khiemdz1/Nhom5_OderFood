@@ -13,5 +13,6 @@ public class MainActivity extends AppCompatActivity {
         //quang comment
         //quang comment2
         //khiem comment
+        //Thicoment
     }
 }
