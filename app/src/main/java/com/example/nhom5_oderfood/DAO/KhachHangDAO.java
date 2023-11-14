@@ -48,4 +48,14 @@ public class KhachHangDAO {
         cursor.close();
         return list_kh;
     }
+    public boolean checkLogin(String ten,String matkhau){
+        SQLiteDatabase db = database.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM KhachHang WHERE Username = ? AND Password = ?", new String[]{ten,matkhau});
+        if (cursor.getCount() != 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }
