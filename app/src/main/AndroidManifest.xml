@@ -16,6 +16,12 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RegisteUser"
+            android:exported="false" />
+        <activity
             android:name=".WellcomeActivity"
             android:exported="true" >
             <intent-filter>
