@@ -20,7 +20,7 @@ public class WellcomeActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(WellcomeActivity.this, MainActivity.class));
+                startActivity(new Intent(WellcomeActivity.this, LoginActivity.class));
             }
         },5000);
     }
