@@ -98,7 +98,7 @@ public class RegisteUser extends AppCompatActivity {
                     long result = dao.AddUser(kh);
                     if (result > 0) {
                         Toast.makeText(RegisteUser.this, "Đăng ký tài khoản thành công!", Toast.LENGTH_SHORT).show();
-                        // Chuyển sang màn hình đăng nhập hoặc thực hiện các thao tác khác
+                        startActivity(new Intent(RegisteUser.this,LoginActivity.class));
                     } else {
                         Toast.makeText(RegisteUser.this, "Đăng ký tài khoản thất bại!", Toast.LENGTH_SHORT).show();
                     }

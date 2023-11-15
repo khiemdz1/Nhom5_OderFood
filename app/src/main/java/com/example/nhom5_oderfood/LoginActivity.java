@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.nhom5_oderfood.DAO.KhachHangDAO;
@@ -17,9 +19,11 @@ import com.google.android.material.textfield.TextInputLayout;
 
 public class LoginActivity extends AppCompatActivity {
     TextInputEditText Password ,Username;
+
     Button btnLogin;
     CheckBox chkRememberPass;
     private KhachHangDAO dao;
+    TextView Taotk;
     int temp = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +33,22 @@ public class LoginActivity extends AppCompatActivity {
         Username  = findViewById(R.id.edtUsername);
         Password  = findViewById(R.id.edtPassword);
         btnLogin  = findViewById(R.id.btnLogin);
+        Taotk = findViewById(R.id.taotk);
         chkRememberPass = findViewById(R.id.chkRememberPass);
         dao = new KhachHangDAO(this);
+
+        SharedPreferences pref = getSharedPreferences("USER_FILE",MODE_PRIVATE);
+        Username.setText(pref.getString("USERNAME",""));
+        Password.setText(pref.getString("PASSWORD",""));
+        chkRememberPass.setChecked(pref.getBoolean("REMEMBER",false));
+
+
+        Taotk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this , RegisteUser.class));
+            }
+        });
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -42,6 +60,15 @@ public class LoginActivity extends AppCompatActivity {
     public void checklg(){
         String user = Username.getText().toString();
         String pass = Password.getText().toString();
+
+        if(user.isEmpty()){
+            Username.setError("Tên Đăng Nhập Đang Trống");
+        }
+
+        if (pass.isEmpty()){
+            Password.setError("Mật Khẩu Nhập Đang Trống");
+
+        }
         if (user.isEmpty() || pass.isEmpty()){
             Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
         } else {

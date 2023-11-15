@@ -22,6 +22,6 @@ public class WellcomeActivity extends AppCompatActivity {
             public void run() {
                 startActivity(new Intent(WellcomeActivity.this, LoginActivity.class));
             }
-        },5000);
+        },4000);
     }
 }
