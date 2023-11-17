@@ -1,21 +1,21 @@
-package com.example.nhom5_oderfood;
+package com.example.nhom5_oderfood.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.nhom5_oderfood.DAO.KhachHangDAO;
+import com.example.nhom5_oderfood.Fragment.MainActivity;
+import com.example.nhom5_oderfood.FragmentAdmin.MainAdminActivity;
+import com.example.nhom5_oderfood.R;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 
 public class LoginActivity extends AppCompatActivity {
     TextInputEditText Password ,Username;
@@ -76,6 +76,9 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, "Đăng Nhập Thành Công", Toast.LENGTH_SHORT).show();
                 rememberUser(user,pass,chkRememberPass.isChecked());
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            } else if (user.equals("admin123")|| pass.equals("admin")) {
+                Toast.makeText(this, "Bạn đã đăng nhập : Admin", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(LoginActivity.this, MainAdminActivity.class));
             } else {
                 Toast.makeText(LoginActivity.this, "Tên đăng nhập hoặc mật khẩu sai", Toast.LENGTH_SHORT).show();
             }

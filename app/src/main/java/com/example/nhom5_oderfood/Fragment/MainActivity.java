@@ -1,4 +1,4 @@
-package com.example.nhom5_oderfood;
+package com.example.nhom5_oderfood.Fragment;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -24,6 +24,7 @@ import com.example.nhom5_oderfood.Fragment.Frag_GioHang;
 import com.example.nhom5_oderfood.Fragment.Frag_HoaDon;
 import com.example.nhom5_oderfood.Fragment.Frag_Home;
 import com.example.nhom5_oderfood.Fragment.Frag_NhaCungCap;
+import com.example.nhom5_oderfood.R;
 import com.example.nhom5_oderfood.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
