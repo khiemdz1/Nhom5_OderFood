@@ -1,4 +1,4 @@
-package com.example.nhom5_oderfood;
+package com.example.nhom5_oderfood.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.example.nhom5_oderfood.R;
 
 public class WellcomeActivity extends AppCompatActivity {
      LottieAnimationView lottiee;

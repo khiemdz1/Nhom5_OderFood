@@ -1,4 +1,4 @@
-package com.example.nhom5_oderfood;
+package com.example.nhom5_oderfood.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.nhom5_oderfood.DAO.KhachHangDAO;
 import com.example.nhom5_oderfood.DTO.khachhang;
+import com.example.nhom5_oderfood.R;
 
 public class RegisteUser extends AppCompatActivity {
     EditText username, password, fullname, sdt, confirmpass, diachi;
