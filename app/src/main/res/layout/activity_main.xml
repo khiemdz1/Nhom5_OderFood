@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawerLayout"
-    tools:context=".Fragment.MainActivity">
+    tools:context=".FragmentKhachHang.MainActivity">
 
 
 
@@ -17,8 +17,8 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#EA6F66"
+            android:layout_height="50dp"
+            android:background="#FF5722"
             app:titleTextColor="@color/white"
             />
 
@@ -32,7 +32,7 @@
             android:id="@+id/bottomNavigationView"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            app:itemIconTint="#FF5722"
+            app:itemIconTint="@color/custom_buttom_nav"
             android:layout_alignParentBottom="true"
             app:menu="@menu/menu2" />
     </LinearLayout>

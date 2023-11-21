@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".FragmentKhachHang.ThongTinMonAn">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#FF5722"
+        app:titleTextColor="@color/white"
+        />
+
+    <ImageView
+        android:scaleType="fitXY"
+        android:id="@+id/image_view2"
+        android:layout_width="match_parent"
+        android:layout_height="220dp" />
+    <TextView
+        android:textStyle="bold"
+        android:textSize="25dp"
+        android:layout_margin="10dp"
+        android:id="@+id/tv_tenmonan2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="abc"/>
+   <LinearLayout
+       android:layout_marginBottom="10dp"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal">
+       <TextView
+           android:textSize="15dp"
+           android:layout_marginLeft="10dp"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Giá: "
+           android:textStyle="normal"/>
+       <TextView
+           android:id="@+id/tv_giamonan2"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="abc"
+           android:textSize="18dp"
+           android:textColor="#FF0000"
+           android:textStyle="bold"
+           />
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginLeft="5dp"
+           android:text="VNĐ"
+           android:textSize="18dp"
+           android:textColor="#FF0000"
+           android:textStyle="bold"
+           />
+   </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#FF5722"/>
+    <TextView
+        android:textSize="20dp"
+        android:textColor="#FF5722"
+        android:textStyle="bold"
+        android:layout_margin="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mô Tả:"/>
+    <TextView
+        android:textSize="23dp"
+        android:id="@+id/tv_mota"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_them"
+        android:layout_margin="10dp"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thêm Vào Giỏ Hàng"
+        android:textColor="@color/white"
+        android:background="@drawable/custom_button"
+        />
+</LinearLayout>

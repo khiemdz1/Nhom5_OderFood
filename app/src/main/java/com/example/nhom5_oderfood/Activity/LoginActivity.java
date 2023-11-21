@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.nhom5_oderfood.DAO.KhachHangDAO;
-import com.example.nhom5_oderfood.Fragment.MainActivity;
+import com.example.nhom5_oderfood.FragmentKhachHang.MainActivity;
 import com.example.nhom5_oderfood.FragmentAdmin.MainAdminActivity;
 import com.example.nhom5_oderfood.R;
 import com.google.android.material.textfield.TextInputEditText;
@@ -73,7 +73,6 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
         } else {
             if (dao.checkLogin(user,pass)){
-                Toast.makeText(LoginActivity.this, "Đăng Nhập Thành Công", Toast.LENGTH_SHORT).show();
                 rememberUser(user,pass,chkRememberPass.isChecked());
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
             } else if (user.equals("admin123")|| pass.equals("admin")) {

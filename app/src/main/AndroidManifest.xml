@@ -13,15 +13,18 @@
         android:theme="@style/Theme.Nhom5_OderFood"
         tools:targetApi="31">
         <activity
+            android:name=".FragmentKhachHang.ThongTinMonAn"
+            android:exported="false" />
+        <activity
             android:name=".FragmentAdmin.MainAdminActivity"
             android:exported="false" />
         <activity
-            android:name=".Fragment.Frag_Home"
+            android:name=".FragmentKhachHang.Frag_Home"
             android:exported="false"
             android:label="@string/title_activity_navigation"
             android:theme="@style/Theme.Nhom5_OderFood.NoActionBar" />
         <activity
-            android:name=".Fragment.MainActivity"
+            android:name=".FragmentKhachHang.MainActivity"
             android:exported="false" />
         <activity
             android:name=".Activity.LoginActivity"
