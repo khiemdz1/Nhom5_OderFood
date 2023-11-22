@@ -9,6 +9,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -58,12 +59,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         nagView.setCheckedItem(R.id.menuHOME);
         bottomNavigationView.getMenu().findItem(R.id.menuHOME2).setChecked(true);
 
-//        NavigationView navigationView = findViewById(R.id.navigationView);
-//        View headerView = navigationView.getHeaderView(0);
-//        TextView headerTextView = headerView.findViewById(R.id.userheader);
-//        khachHangDAO = new KhachHangDAO(this);
-//        String dataFromSQLite = khachHangDAO.fetchDataName();
-//        headerTextView.setText(dataFromSQLite);
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

@@ -30,24 +30,6 @@ public class KhachHangDAO {
         return db.insert("KhachHang", null, values);
     }
 
-    @SuppressLint("Range")
-    public ArrayList<khachhang> GetAccount() {
-        ArrayList<khachhang> list_kh = new ArrayList<khachhang>();
-        Cursor cursor = db.rawQuery("SELECT * FROM KhachHang", null);
-        if (cursor.moveToFirst()) {
-            do {
-                khachhang kh = new khachhang();
-                kh.setUsername(cursor.getString(cursor.getColumnIndex("Username")));
-                kh.setPassword(cursor.getString(cursor.getColumnIndex("Password")));
-                kh.setFullname(cursor.getString(cursor.getColumnIndex("Fullname")));
-                kh.setSdt(cursor.getString(cursor.getColumnIndex("Sdt")));
-                kh.setDiachi(cursor.getString(cursor.getColumnIndex("Diachi")));
-                list_kh.add(kh);
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        return list_kh;
-    }
     public boolean checkLogin(String ten,String matkhau){
         SQLiteDatabase db = database.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM KhachHang WHERE Username = ? AND Password = ?", new String[]{ten,matkhau});
@@ -78,62 +60,34 @@ public class KhachHangDAO {
         db.close();
         return password;
     }
-
     @SuppressLint("Range")
-    public String getNameByUsername(String username) {
-        String name = null;
-        SQLiteDatabase db = database.getReadableDatabase();
-
-        String query = "SELECT * FROM KhachHang WHERE Fullname = ?";
-        Cursor cursor = db.rawQuery(query, new String[]{username});
-        if (cursor != null && cursor.moveToFirst()) {
-            name = cursor.getString(cursor.getColumnIndex("name"));
+    public ArrayList<khachhang> GetAccount(int makh) {
+        ArrayList<khachhang> list_kh = new ArrayList<>();
+        String[] selectionArgs = {String.valueOf(makh)};
+        Cursor cursor = db.rawQuery("SELECT * FROM KhachHang WHERE MaKH = ?", selectionArgs);
+        if (cursor.moveToFirst()) {
+            do {
+                khachhang kh = new khachhang();
+                kh.setUsername(cursor.getString(cursor.getColumnIndex("Username")));
+                kh.setPassword(cursor.getString(cursor.getColumnIndex("Password")));
+                kh.setFullname(cursor.getString(cursor.getColumnIndex("Fullname")));
+                kh.setSdt(cursor.getString(cursor.getColumnIndex("Sdt")));
+                kh.setDiachi(cursor.getString(cursor.getColumnIndex("Diachi")));
+                list_kh.add(kh);
+            } while (cursor.moveToNext());
         }
-        if (cursor != null) {
-            cursor.close();
-        }
-        return name;
+        cursor.close();
+        return list_kh;
     }
 
-    @SuppressLint("Range")
-    public boolean fetchDataName(int makh,String name, String sdt, String diachi) {
+    public boolean fetchDataKhachhang(int makh,String name, String sdt, String diachi) {
         SQLiteDatabase db = database.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("Fullname", name);
         values.put("Sdt", sdt);
         values.put("Diachi", diachi);
-
         int check = db.update("KhachHang", values, "MaKH = ?", new String[]{String.valueOf(makh)});
-
         return  check!=-1;
     }
 
-    @SuppressLint("Range")
-    public String fetchDataSDT() {
-        SQLiteDatabase db = database.getReadableDatabase();
-        String result = "";
-
-        Cursor cursor = db.rawQuery("SELECT * FROM KhachHang", null);
-        if (cursor.moveToFirst()) {
-            result = cursor.getString(cursor.getColumnIndex("Sdt"));
-        }
-
-        cursor.close();
-        db.close();
-        return result;
-    }
-    @SuppressLint("Range")
-    public String fetchDataDiaChi() {
-        SQLiteDatabase db = database.getReadableDatabase();
-        String result = "";
-
-        Cursor cursor = db.rawQuery("SELECT * FROM KhachHang", null);
-        if (cursor.moveToFirst()) {
-            result = cursor.getString(cursor.getColumnIndex("Diachi"));
-        }
-
-        cursor.close();
-        db.close();
-        return result;
-    }
 }
