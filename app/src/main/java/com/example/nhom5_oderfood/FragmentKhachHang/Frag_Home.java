@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,8 +31,9 @@ public class Frag_Home extends Fragment {
 
     ImageSlider imageSlider;
     RecyclerView rcv;
-    ArrayList<MonAn> list;
+    ArrayList<MonAn> list , list2;
     MonAnAdapter monAnAdapter;
+    androidx.appcompat.widget.SearchView searchView;
     MonAnDAO monAnDAO;
     @Nullable
     @Override
@@ -45,12 +47,28 @@ public class Frag_Home extends Fragment {
         slideModels.add(new SlideModel(R.drawable.banner3, ScaleTypes.FIT));
         imageSlider.setImageList(slideModels);
         imageSlider.setSlideAnimation(AnimationTypes.ZOOM_OUT);
+        searchView = view.findViewById(R.id.search);
         imageSlider.startSliding(4000);
         rcv = view.findViewById(R.id.rcv_view);
         monAnDAO = new MonAnDAO(getContext());
         list = monAnDAO.getAll();
+        list2 = monAnDAO.getAll();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filter(newText);
+                return true;
+            }
+        });
         GridLayoutManager gridLayoutManager = new GridLayoutManager(context,2);
         rcv.setLayoutManager(gridLayoutManager);
+
+
         monAnAdapter = new MonAnAdapter(getContext(),list);
         rcv.setAdapter(monAnAdapter);
 
@@ -67,5 +85,14 @@ public class Frag_Home extends Fragment {
             }
         });
         return view;
+    }
+    public void filter(String s){
+        list.clear();
+        for (MonAn ma:list2){
+            if (ma.getTenMA().contains(s.toString())){
+                list.add(ma);
+            }
+        }
+        monAnAdapter.notifyDataSetChanged();
     }
 }
