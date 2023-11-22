@@ -58,4 +58,82 @@ public class KhachHangDAO {
             return false;
         }
     }
+    public void changePassword(String username, String newPassword){
+        SQLiteDatabase db = database.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("Password", newPassword);
+        db.update("KhachHang", cv, "Username=?", new String[]{username});
+        db.close();
+    }
+    @SuppressLint("Range")
+    public String getPasswordByUsername(String username) {
+        String password = null;
+        SQLiteDatabase db = database.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT Password FROM KhachHang WHERE Username=?", new String[]{username});
+        if (cursor.moveToFirst()) {
+            // Lấy mật khẩu từ cột "password" trong kết quả truy vấn
+            password = cursor.getString(cursor.getColumnIndex("Password"));
+        }
+        cursor.close();
+        db.close();
+        return password;
+    }
+
+    @SuppressLint("Range")
+    public String getNameByUsername(String username) {
+        String name = null;
+        SQLiteDatabase db = database.getReadableDatabase();
+
+        String query = "SELECT * FROM KhachHang WHERE Fullname = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{username});
+        if (cursor != null && cursor.moveToFirst()) {
+            name = cursor.getString(cursor.getColumnIndex("name"));
+        }
+        if (cursor != null) {
+            cursor.close();
+        }
+        return name;
+    }
+
+    @SuppressLint("Range")
+    public boolean fetchDataName(int makh,String name, String sdt, String diachi) {
+        SQLiteDatabase db = database.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("Fullname", name);
+        values.put("Sdt", sdt);
+        values.put("Diachi", diachi);
+
+        int check = db.update("KhachHang", values, "MaKH = ?", new String[]{String.valueOf(makh)});
+
+        return  check!=-1;
+    }
+
+    @SuppressLint("Range")
+    public String fetchDataSDT() {
+        SQLiteDatabase db = database.getReadableDatabase();
+        String result = "";
+
+        Cursor cursor = db.rawQuery("SELECT * FROM KhachHang", null);
+        if (cursor.moveToFirst()) {
+            result = cursor.getString(cursor.getColumnIndex("Sdt"));
+        }
+
+        cursor.close();
+        db.close();
+        return result;
+    }
+    @SuppressLint("Range")
+    public String fetchDataDiaChi() {
+        SQLiteDatabase db = database.getReadableDatabase();
+        String result = "";
+
+        Cursor cursor = db.rawQuery("SELECT * FROM KhachHang", null);
+        if (cursor.moveToFirst()) {
+            result = cursor.getString(cursor.getColumnIndex("Diachi"));
+        }
+
+        cursor.close();
+        db.close();
+        return result;
+    }
 }

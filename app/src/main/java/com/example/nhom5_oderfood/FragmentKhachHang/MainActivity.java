@@ -11,9 +11,12 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 
+import com.example.nhom5_oderfood.DAO.KhachHangDAO;
 import com.example.nhom5_oderfood.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -31,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Toolbar toolbar;
     NavigationView nagView;
     DrawerLayout drawerLayout;
-
+    KhachHangDAO khachHangDAO;
     BottomNavigationView bottomNavigationView;
     FrameLayout frameLayout;
     @Override
@@ -54,6 +57,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         relaceFrg(new Frag_Home());
         nagView.setCheckedItem(R.id.menuHOME);
         bottomNavigationView.getMenu().findItem(R.id.menuHOME2).setChecked(true);
+
+//        NavigationView navigationView = findViewById(R.id.navigationView);
+//        View headerView = navigationView.getHeaderView(0);
+//        TextView headerTextView = headerView.findViewById(R.id.userheader);
+//        khachHangDAO = new KhachHangDAO(this);
+//        String dataFromSQLite = khachHangDAO.fetchDataName();
+//        headerTextView.setText(dataFromSQLite);
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

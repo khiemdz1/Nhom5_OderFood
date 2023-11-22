@@ -16,6 +16,12 @@
             android:name=".FragmentKhachHang.ThongTinMonAn"
             android:exported="false" />
         <activity
+            android:name=".FragmentKhachHang.DoiMK"
+            android:exported="false" />
+        <activity
+            android:name=".FragmentKhachHang.ThayDoiTT"
+            android:exported="false" />
+        <activity
             android:name=".FragmentAdmin.MainAdminActivity"
             android:exported="false" />
         <activity
