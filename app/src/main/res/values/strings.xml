@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Nhom5_OderFood</string>
     <string name="New"><u>Tạo tài khoản mới</u></string>
+    <string name="changTT"><u>Thông tin người dùng</u></string>
+    <string name="changMK"><u>Đổi mật khẩu</u></string>
+    <string name="out"><u>Đăng xuất</u></string>
     <string name="open">Open nav</string>
     <string name="close">Close nav</string>
     <string name="title_activity_navigation">navigation</string>
