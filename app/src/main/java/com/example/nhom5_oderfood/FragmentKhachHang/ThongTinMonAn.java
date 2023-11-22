@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.nhom5_oderfood.FragmentKhachHang.databasegiohang.AppDatabase;
@@ -26,11 +27,10 @@ public class ThongTinMonAn extends AppCompatActivity{
     Toolbar toolbar;
     ImageView imageView;
     TextView tv_ten,tv_gia,tv_motama;
-    Button btn_themmonan,btn_huy;
+    Button btn_themmonan;
     // đặt biến toàn cục
     String anh,ten,mota;
     int gia;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,15 +67,14 @@ public class ThongTinMonAn extends AppCompatActivity{
         tv_ten.setText(ten);
         tv_gia.setText(gia2);
         tv_motama.setText(mota);
-        // Khởi tạo ViewModel
 
 
-        btn_themmonan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                OpenBottomSheetDialog();
-            }
-        });
+            btn_themmonan.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    OpenBottomSheetDialog();
+                }
+            });
 
     }
 
@@ -91,11 +90,11 @@ public class ThongTinMonAn extends AppCompatActivity{
         bottomSheetFrag.setCancelable(false);
         bottomSheetFrag.show(getSupportFragmentManager(), bottomSheetFrag.getTag());
     }
-
     // back
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return super.onSupportNavigateUp();
     }
+
 }

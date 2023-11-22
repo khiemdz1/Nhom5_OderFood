@@ -10,6 +10,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -17,6 +21,7 @@ import com.example.nhom5_oderfood.DTO.GioHang;
 import com.example.nhom5_oderfood.FragmentKhachHang.databasegiohang.AppDatabase;
 import com.example.nhom5_oderfood.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.Viewholder>{
@@ -60,7 +65,7 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.Viewhold
             public void onClick(View view) {
                 AppDatabase.getDatabase(context).gioHangDao().deleteMonAn(gioHang);
                 list.remove(gioHang);
-                notifyDataSetChanged();
+               notifyDataSetChanged();
 
                 Toast.makeText(context, "Đã xóa", Toast.LENGTH_SHORT).show();
 

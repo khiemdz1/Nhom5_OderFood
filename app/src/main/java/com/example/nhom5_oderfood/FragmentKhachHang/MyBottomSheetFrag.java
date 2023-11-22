@@ -1,7 +1,6 @@
 package com.example.nhom5_oderfood.FragmentKhachHang;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 import com.example.nhom5_oderfood.DTO.GioHang;
@@ -87,7 +86,6 @@ public class MyBottomSheetFrag extends BottomSheetDialogFragment{
             }
         });
         btn_tru.setOnClickListener(new View.OnClickListener() {
-            View view = getView();
             @Override
             public void onClick(View view) {
                 if (dem > 1) {
@@ -99,6 +97,14 @@ public class MyBottomSheetFrag extends BottomSheetDialogFragment{
             }
         });
         updateUI();
+        AppDatabase db = AppDatabase.getDatabase(getContext());
+        int count = db.gioHangDao().checkMonan(tenMonAn);
+        if(count != 0 ){
+            btn_them.setEnabled(false);
+            btn_them.setText("Đã Có Trong Giỏ Hàng");
+            btn_them.setTextColor(ContextCompat.getColor(getContext(), R.color.black));
+            btn_them.setBackgroundResource(R.drawable.custom_cancel);
+        }
                 btn_them.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
