@@ -89,7 +89,7 @@ public class Frag_Home extends Fragment {
     public void filter(String s){
         list.clear();
         for (MonAn ma:list2){
-            if (ma.getTenMA().contains(s.toString())){
+            if (ma.getTenMA().toLowerCase().contains(s.toString())){
                 list.add(ma);
             }
         }

@@ -3,8 +3,11 @@ package com.example.nhom5_oderfood.DAO;
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
 import com.example.nhom5_oderfood.DTO.khachhang;
 import com.example.nhom5_oderfood.Dbhelper.MyDbhelper;
 
@@ -14,7 +17,11 @@ public class KhachHangDAO {
     MyDbhelper database;
     SQLiteDatabase db;
 
+    Context context;
+
+
     public KhachHangDAO(Context context) {
+        this.context = context;
         database = new MyDbhelper(context);
         db = database.getWritableDatabase();
     }
@@ -61,9 +68,9 @@ public class KhachHangDAO {
         return password;
     }
     @SuppressLint("Range")
-    public ArrayList<khachhang> GetAccount(int makh) {
+    public ArrayList<khachhang> GetAccount() {
         ArrayList<khachhang> list_kh = new ArrayList<>();
-        String[] selectionArgs = {String.valueOf(makh)};
+        String[] selectionArgs = {"maKH"};
         Cursor cursor = db.rawQuery("SELECT * FROM KhachHang WHERE MaKH = ?", selectionArgs);
         if (cursor.moveToFirst()) {
             do {

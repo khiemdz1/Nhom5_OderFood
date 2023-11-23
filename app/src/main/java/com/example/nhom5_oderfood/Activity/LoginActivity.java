@@ -2,6 +2,7 @@ package com.example.nhom5_oderfood.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -16,6 +17,8 @@ import com.example.nhom5_oderfood.FragmentKhachHang.MainActivity;
 import com.example.nhom5_oderfood.FragmentAdmin.MainAdminActivity;
 import com.example.nhom5_oderfood.R;
 import com.google.android.material.textfield.TextInputEditText;
+
+import java.util.UUID;
 
 public class LoginActivity extends AppCompatActivity {
     TextInputEditText Password ,Username;
@@ -95,4 +98,5 @@ public class LoginActivity extends AppCompatActivity {
         }
         editor.commit();
     }
+
 }

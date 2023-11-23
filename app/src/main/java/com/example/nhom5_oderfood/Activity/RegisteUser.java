@@ -2,7 +2,9 @@ package com.example.nhom5_oderfood.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +14,8 @@ import android.widget.Toast;
 import com.example.nhom5_oderfood.DAO.KhachHangDAO;
 import com.example.nhom5_oderfood.DTO.khachhang;
 import com.example.nhom5_oderfood.R;
+
+import java.util.UUID;
 
 public class RegisteUser extends AppCompatActivity {
     EditText username, password, fullname, sdt, confirmpass, diachi;
@@ -99,7 +103,9 @@ public class RegisteUser extends AppCompatActivity {
                     long result = dao.AddUser(kh);
                     if (result > 0) {
                         Toast.makeText(RegisteUser.this, "Đăng ký tài khoản thành công!", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(RegisteUser.this,LoginActivity.class));
+                        Intent intent = new Intent(RegisteUser.this,LoginActivity.class);
+                        startActivity(intent);
+
                     } else {
                         Toast.makeText(RegisteUser.this, "Đăng ký tài khoản thất bại!", Toast.LENGTH_SHORT).show();
                     }
@@ -107,4 +113,5 @@ public class RegisteUser extends AppCompatActivity {
             }
         });
     }
+
 }

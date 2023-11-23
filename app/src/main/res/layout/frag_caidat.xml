@@ -7,7 +7,6 @@
     android:background="@drawable/backgroundcd">
 
 
-
     <androidx.cardview.widget.CardView
         android:layout_width="350dp"
         android:layout_height="550dp"

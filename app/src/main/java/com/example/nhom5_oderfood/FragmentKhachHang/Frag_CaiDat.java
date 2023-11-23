@@ -1,8 +1,11 @@
 package com.example.nhom5_oderfood.FragmentKhachHang;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -28,9 +31,8 @@ import java.util.ArrayList;
 public class Frag_CaiDat extends Fragment {
     TextView logout,doimk,thongtinnd,userheadercd;
     KhachHangDAO khachHangDAO;
-    khachhang kh;
+    ArrayList<khachhang> list;
 
-    int id;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -40,10 +42,8 @@ public class Frag_CaiDat extends Fragment {
         thongtinnd = view.findViewById(R.id.changeTT);
         userheadercd = view.findViewById(R.id.userheadercd);
         khachHangDAO = new KhachHangDAO(getContext());
-        kh = new khachhang();
 
 
-//
 //        userheadercd.setText(kh.getFullname());
 
         logout.setOnClickListener(new View.OnClickListener() {

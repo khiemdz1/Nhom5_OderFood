@@ -9,6 +9,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -24,6 +25,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     static final int FRAG_HOME = 0;
     static final int FRAG_GIOHANG = 1;
@@ -38,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     KhachHangDAO khachHangDAO;
     BottomNavigationView bottomNavigationView;
     FrameLayout frameLayout;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         relaceFrg(new Frag_Home());
         nagView.setCheckedItem(R.id.menuHOME);
         bottomNavigationView.getMenu().findItem(R.id.menuHOME2).setChecked(true);
+
 
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
