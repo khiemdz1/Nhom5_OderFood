@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 
 
 import com.example.nhom5_oderfood.DAO.KhachHangDAO;
+import com.example.nhom5_oderfood.DTO.khachhang;
 import com.example.nhom5_oderfood.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -62,8 +64,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         relaceFrg(new Frag_Home());
         nagView.setCheckedItem(R.id.menuHOME);
         bottomNavigationView.getMenu().findItem(R.id.menuHOME2).setChecked(true);
-
-
+        //set fullname vào header
+        khachHangDAO = new KhachHangDAO(this);
+        View headerview = nagView.getHeaderView(0);
+        TextView nameheader = headerview.findViewById(R.id.userheader);
+        int loggedInUserId = getLoggedInUserId();
+        khachhang infokh = khachHangDAO.fetchData(loggedInUserId);
+        String fullName = infokh.getFullname();
+        nameheader.setText(fullName);
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -144,6 +152,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 super.onBackPressed();
             }
         }
-
+        // hàm lấy id
+    private int getLoggedInUserId() {
+        SharedPreferences sharedPreferences = this.getSharedPreferences("USER_FILE", MODE_PRIVATE);
+        return sharedPreferences.getInt("USER_ID", -1); // -1 là giá trị mặc định nếu không tìm thấy
+    }
 
 }

@@ -6,33 +6,24 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.nhom5_oderfood.Activity.LoginActivity;
-import com.example.nhom5_oderfood.Activity.WellcomeActivity;
 import com.example.nhom5_oderfood.DAO.KhachHangDAO;
 import com.example.nhom5_oderfood.DTO.khachhang;
 import com.example.nhom5_oderfood.R;
 
-import java.util.ArrayList;
-
 public class Frag_CaiDat extends Fragment {
     TextView logout,doimk,thongtinnd,userheadercd;
     KhachHangDAO khachHangDAO;
-    ArrayList<khachhang> list;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -43,8 +34,10 @@ public class Frag_CaiDat extends Fragment {
         userheadercd = view.findViewById(R.id.userheadercd);
         khachHangDAO = new KhachHangDAO(getContext());
 
-
-//        userheadercd.setText(kh.getFullname());
+        int loggedInUserId = getLoggedInUserId();
+        khachhang infokh = khachHangDAO.fetchData(loggedInUserId);
+        String fullName = infokh.getFullname();
+        userheadercd.setText(fullName);
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,8 +51,8 @@ public class Frag_CaiDat extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(getActivity(), LoginActivity.class);
-
-                        startActivity(intent);                    }
+                        startActivity(intent);
+                    }
                 });
                 builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
                     @Override
@@ -86,7 +79,9 @@ public class Frag_CaiDat extends Fragment {
             }
         });
         return view;
-
-
+    }
+    private int getLoggedInUserId() {
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("USER_FILE", MODE_PRIVATE);
+        return sharedPreferences.getInt("USER_ID", -1); // -1 là giá trị mặc định nếu không tìm thấy
     }
 }

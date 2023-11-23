@@ -7,9 +7,7 @@ public class khachhang {
     public khachhang() {
     }
 
-    public khachhang(String username, String password, String fullname, String sdt, String diachi) {
-        this.username = username;
-        this.password = password;
+    public khachhang(String fullname, String sdt, String diachi) {
         this.fullname = fullname;
         this.sdt = sdt;
         this.diachi = diachi;

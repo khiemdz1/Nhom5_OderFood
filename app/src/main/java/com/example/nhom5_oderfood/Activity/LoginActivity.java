@@ -75,8 +75,9 @@ public class LoginActivity extends AppCompatActivity {
         if (user.isEmpty() || pass.isEmpty()){
             Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
         } else {
+            int userId = dao.getUserId(user, pass);
             if (dao.checkLogin(user,pass)){
-                rememberUser(user,pass,chkRememberPass.isChecked());
+                rememberUser(userId,user,pass,chkRememberPass.isChecked());
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
             } else if (user.equals("admin123")|| pass.equals("admin")) {
                 Toast.makeText(this, "Bạn đã đăng nhập : Admin", Toast.LENGTH_SHORT).show();
@@ -86,17 +87,17 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     }
-    public void rememberUser(String u, String p, boolean status){
+    public void rememberUser(int userId,String u, String p, boolean status){
         SharedPreferences pref = getSharedPreferences("USER_FILE",MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         if (!status){
             editor.clear();
         }else {
+            editor.putInt("USER_ID", userId);
             editor.putString("USERNAME",u);
             editor.putString("PASSWORD",p);
             editor.putBoolean("REMEMBER",status);
         }
-        editor.commit();
+        editor.apply();
     }
-
 }
