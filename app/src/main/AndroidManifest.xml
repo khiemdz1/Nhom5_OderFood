@@ -12,6 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nhom5_OderFood"
         tools:targetApi="31">
+        <activity android:name=".FragmentAdmin.DetailActivity_Admin"
+            android:exported="false"/>
         <activity
             android:name=".FragmentKhachHang.ThongTinMonAn"
             android:exported="false" />
