@@ -23,38 +23,38 @@ public class MyDbhelper extends SQLiteOpenHelper {
                 "Diachi TEXT NOT NULL)";
         db.execSQL(Tablekhachhang);
         // bảng loại món ăn
-//        String TableTheloai = "CREATE TABLE TheLoai(" +
-//                "MaTL TEXT PRIMARY KEY AUTOINCREMENT," +
-//                "Tentheloai TEXT NOT NULL)";
-//        db.execSQL(TableTheloai);
+        String TableTheloai = "CREATE TABLE TheLoai(" +
+                "MaTL INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "Tentheloai TEXT NOT NULL)";
+        db.execSQL(TableTheloai);
 //        // bảng món ăn
         String Tablemonan = "CREATE TABLE MonAn(" +
                 "MaMA INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "Hinhanh TEXT NOT NULL," +
                 "Tenmonan TEXT NOT NULL," +
                 "MaTL INTEGER REFERENCES TheLoai(MaTL)," +
-                "Donngia INTEGER NOT NULL," +
+                "Dongia INTEGER NOT NULL," +
                 "Mota TEXT NOT NULL)";
         db.execSQL(Tablemonan);
 
-//        // Bảng Hóa Đơn
-//        String Tablehoadon = "CREATE TABLE HoaDon(" +
-//                "MaHD INTEGER PRIMARY KEY AUTOINCREMENT," +
-//                "MaMA INTEGER REFERENCES MonAn(MaMA)," +
-//                "MaKH INTEGER REFERENCES KhachHang(MaKH)," +
-//                "Tenmonan TEXT NOT NULL," +
-//                "Diachi TEXT NOT NULL," +
-//                "Soluong TEXT NOT NULL," +
-//                "Dongia INTEGER NOT NULL)";
-//        db.execSQL(Tablehoadon);
-//        // Bảng nhà cung cấp
-//        String Tablenhacc = "CREATE TABLE NhaCungCap(" +
-//                "MaNCC INTEGER PRIMARY KEY AUTOINCREMENT," +
-//                "Tennhacc TEXT NOT NULL," +
-//                "Thongtin TEXT NOT NULL," +
-//                "Lienhe TEXT NOT NULL," +
-//                "Email INTEGER NOT NULL)";
-//        db.execSQL(Tablenhacc);
+        // Bảng Hóa Đơn
+        String Tablehoadon = "CREATE TABLE HoaDon(" +
+                "MaHD INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "TenHD TEXT NOT NULL," +
+                "SdtHD TEXT NOT NULL," +
+                "DiachiHD TEXT NOT NULL," +
+                "TenmonanHD TEXT NOT NULL," +
+                "SoluongHD TEXT NOT NULL," +
+                "GiaHD TEXT NOT NULL)";
+        db.execSQL(Tablehoadon);
+        // Bảng nhà cung cấp
+        String Tablenhacc = "CREATE TABLE NhaCungCap(" +
+                "MaNCC INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "Tennhacc TEXT NOT NULL," +
+                "Thongtin TEXT NOT NULL," +
+                "Lienhe TEXT NOT NULL," +
+                "Email TEXT NOT NULL)";
+        db.execSQL(Tablenhacc);
 //
         db.execSQL("INSERT INTO MonAn VALUES (1,'anhmonan1','Pizza Phô Mai',1,45000,'Pizza là loại bánh có hình tròn được nướng lên với 3 thành phần chính là đế bánh, nhân bánh và phô mai phủ. Trong đó, đế bánh được chế biến từ quá trình ủ bột mì, nấm men và nước, sau đó được nhào nặn thành hình tròn. Phần topping pizza đa dạng gồm hải sản, xúc xích, phô mai, ….')," +
                 "(2,'anhmonan2','Gà Rán',1,56000,'Gà rán là một món ăn xuất xứ từ miền Nam Hoa Kỳ; nguyên liệu chính là những miếng thịt gà đã được lăn bột rồi chiên trên chảo, chiên ngập dầu, chiên áp suất hoặc chiên chân không. Lớp bột chiên xù sẽ giúp cho miếng gà có một lớp vỏ ngoài giòn rụm, còn phần thịt bên trong vẫn mềm và mọng nước.')," +
@@ -64,17 +64,17 @@ public class MyDbhelper extends SQLiteOpenHelper {
                 "(6,'nuocuong2','Pepsi',2,12000,'Pepsi một đồ uống giải khát có gas, lần đầu tiên được sản xuất bởi Caleb Bradham. Ban đầu, Ông pha chế ra một loại nước uống dễ hấp thụ làm từ nước cacbonat, đường, vani và một ít dầu ăn dưới tên “Nước uống của Brad\" năm 1892.')");
         db.execSQL("INSERT INTO KhachHang VALUES (1,'admin','admin','Can Gia Khiem',0372858655,'HaNoi')");
 
-
+        db.execSQL("Insert Into TheLoai values(1,'Đồ ăn'),(2,'Đồ uống')");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         String tablekhachhang = "drop table if exists KhachHang";
         db.execSQL(tablekhachhang);
-//        String tableloaimonan = "drop table if exists TheLoai";
-//        db.execSQL(tableloaimonan);
-//        String tablemonan = "drop table if exists MonAn";
-//        db.execSQL(tablemonan);
+        String tableloaimonan = "drop table if exists TheLoai";
+        db.execSQL(tableloaimonan);
+        String tablemonan = "drop table if exists MonAn";
+        db.execSQL(tablemonan);
 //        String tablehoadon = "drop table if exists HoaDon";
 //        db.execSQL(tablehoadon);
 //        String tablenhacc= "drop table if exists NhaCungCap";

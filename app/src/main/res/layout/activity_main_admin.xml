@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawerLayout"
-    tools:context=".FragmentKhachHang.MainActivity">
+    tools:context=".FragmentAdmin.MainAdminActivity">
 
 
 
@@ -25,8 +25,14 @@
         <FrameLayout
             android:id="@+id/frameLayout_admin"
             android:layout_width="match_parent"
-            android:layout_height="611dp"
-            android:layout_weight="1" />
+            android:layout_height="1dp"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rc_monan"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:layout_weight="1"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"

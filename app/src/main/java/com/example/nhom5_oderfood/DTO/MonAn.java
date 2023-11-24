@@ -11,7 +11,10 @@ public class MonAn  implements Serializable{
     private String motaMA;
     private int soLuong;
 
-    public MonAn(String hinhMA,String tenMA,int giaMA) {
+    public MonAn() {
+    }
+
+    public MonAn(String hinhMA, String tenMA, int giaMA) {
         this.hinhMA = hinhMA;
         this.tenMA = tenMA;
         this.giaMA = giaMA;
