@@ -3,8 +3,10 @@ package com.example.nhom5_oderfood.FragmentKhachHang;
 import static android.content.Context.MODE_PRIVATE;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -66,7 +68,7 @@ public class MyBottomSheetFragDatHang extends BottomSheetDialogFragment {
         StringBuilder thongTinStringBuilder = new StringBuilder();
         for (GioHang item : list) {
             thongTinStringBuilder.append("Tên: ").append(item.getTenGH())
-                    .append("  X").append(item.getSoluongGH())
+                    .append("  x").append(item.getSoluongGH())
                     .append("\n");
         }
         tv_tenmon.setText(thongTinStringBuilder);
@@ -84,6 +86,7 @@ public class MyBottomSheetFragDatHang extends BottomSheetDialogFragment {
         btn_xacnhan.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
+
                  HoaDon hoaDon = new HoaDon();
                  hoaDon.setTenkhachhangHD(infokh.getFullname());
                  hoaDon.setSdtkhachhangHD(infokh.getSdt());
@@ -94,6 +97,7 @@ public class MyBottomSheetFragDatHang extends BottomSheetDialogFragment {
 
                  long result = hoaDonDAO.addHoadon(hoaDon);
                  if (result != -1) {
+                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new Frag_HoaDon()).addToBackStack(null).commit();
                      Toast.makeText(getContext(), "Đơn hàng đã được đặt thành công", Toast.LENGTH_SHORT).show();
                      dismiss();
                  } else {
