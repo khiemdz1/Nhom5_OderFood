@@ -37,16 +37,16 @@ public class MyDbhelper extends SQLiteOpenHelper {
                 "Mota TEXT NOT NULL)";
         db.execSQL(Tablemonan);
 
-       // Bảng Hóa Đơn
-        String Tablehoadon = "CREATE TABLE HoaDon(" +
-                "MaHD INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "TenHD TEXT NOT NULL," +
-                "SdtHD TEXT NOT NULL," +
-                "DiachiHD TEXT NOT NULL," +
-                "TenmonanHD TEXT NOT NULL," +
-                "SoluongHD TEXT NOT NULL," +
-                "GiaHD TEXT NOT NULL)";
-        db.execSQL(Tablehoadon);
+//        // Bảng Hóa Đơn
+//        String Tablehoadon = "CREATE TABLE HoaDon(" +
+//                "MaHD INTEGER PRIMARY KEY AUTOINCREMENT," +
+//                "MaMA INTEGER REFERENCES MonAn(MaMA)," +
+//                "MaKH INTEGER REFERENCES KhachHang(MaKH)," +
+//                "Tenmonan TEXT NOT NULL," +
+//                "Diachi TEXT NOT NULL," +
+//                "Soluong TEXT NOT NULL," +
+//                "Dongia INTEGER NOT NULL)";
+//        db.execSQL(Tablehoadon);
 //        // Bảng nhà cung cấp
 //        String Tablenhacc = "CREATE TABLE NhaCungCap(" +
 //                "MaNCC INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -55,7 +55,7 @@ public class MyDbhelper extends SQLiteOpenHelper {
 //                "Lienhe TEXT NOT NULL," +
 //                "Email INTEGER NOT NULL)";
 //        db.execSQL(Tablenhacc);
-
+//
         db.execSQL("INSERT INTO MonAn VALUES (1,'anhmonan1','Pizza Phô Mai',1,45000,'Pizza là loại bánh có hình tròn được nướng lên với 3 thành phần chính là đế bánh, nhân bánh và phô mai phủ. Trong đó, đế bánh được chế biến từ quá trình ủ bột mì, nấm men và nước, sau đó được nhào nặn thành hình tròn. Phần topping pizza đa dạng gồm hải sản, xúc xích, phô mai, ….')," +
                 "(2,'anhmonan2','Gà Rán',1,56000,'Gà rán là một món ăn xuất xứ từ miền Nam Hoa Kỳ; nguyên liệu chính là những miếng thịt gà đã được lăn bột rồi chiên trên chảo, chiên ngập dầu, chiên áp suất hoặc chiên chân không. Lớp bột chiên xù sẽ giúp cho miếng gà có một lớp vỏ ngoài giòn rụm, còn phần thịt bên trong vẫn mềm và mọng nước.')," +
                 "(3,'anhmonan3','Cơm Tấm',1,62000,'Cơm tấm là món ăn truyền thống của người Việt Nam. Taste Atlas mô tả đây là món ăn bình dân bởi nguyên liệu chính là tấm, một loại gạo vỡ trong quá trình sản xuất gạo. Đây là món ăn thực khách có thể tìm thấy ở bất kỳ đâu tại các tỉnh thành miền Tây Nam Bộ.')," +
