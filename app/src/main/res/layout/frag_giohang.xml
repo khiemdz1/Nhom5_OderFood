@@ -54,6 +54,7 @@
             android:gravity="end"
             android:layout_height="wrap_content">
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_dathang"
             android:text="Đặt Hàng"
             android:textStyle="bold"
             android:background="@drawable/custom_buttom2"
