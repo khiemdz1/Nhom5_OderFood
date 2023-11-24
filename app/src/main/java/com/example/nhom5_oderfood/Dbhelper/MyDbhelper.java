@@ -23,17 +23,17 @@ public class MyDbhelper extends SQLiteOpenHelper {
                 "Diachi TEXT NOT NULL)";
         db.execSQL(Tablekhachhang);
         // bảng loại món ăn
-//        String TableTheloai = "CREATE TABLE TheLoai(" +
-//                "MaTL TEXT PRIMARY KEY AUTOINCREMENT," +
-//                "Tentheloai TEXT NOT NULL)";
-//        db.execSQL(TableTheloai);
+        String TableTheloai = "CREATE TABLE TheLoai(" +
+                "MaTL INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "Tentheloai TEXT NOT NULL)";
+        db.execSQL(TableTheloai);
 //        // bảng món ăn
         String Tablemonan = "CREATE TABLE MonAn(" +
                 "MaMA INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "Hinhanh TEXT NOT NULL," +
                 "Tenmonan TEXT NOT NULL," +
                 "MaTL INTEGER REFERENCES TheLoai(MaTL)," +
-                "Donngia INTEGER NOT NULL," +
+                "Dongia INTEGER NOT NULL," +
                 "Mota TEXT NOT NULL)";
         db.execSQL(Tablemonan);
 
@@ -64,17 +64,17 @@ public class MyDbhelper extends SQLiteOpenHelper {
                 "(6,'nuocuong2','Pepsi',2,12000,'Pepsi một đồ uống giải khát có gas, lần đầu tiên được sản xuất bởi Caleb Bradham. Ban đầu, Ông pha chế ra một loại nước uống dễ hấp thụ làm từ nước cacbonat, đường, vani và một ít dầu ăn dưới tên “Nước uống của Brad\" năm 1892.')");
         db.execSQL("INSERT INTO KhachHang VALUES (1,'admin','admin','Can Gia Khiem',0372858655,'HaNoi')");
 
-
+        db.execSQL("Insert Into TheLoai values(1,'Đồ ăn'),(2,'Đồ uống')");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         String tablekhachhang = "drop table if exists KhachHang";
         db.execSQL(tablekhachhang);
-//        String tableloaimonan = "drop table if exists TheLoai";
-//        db.execSQL(tableloaimonan);
-//        String tablemonan = "drop table if exists MonAn";
-//        db.execSQL(tablemonan);
+        String tableloaimonan = "drop table if exists TheLoai";
+        db.execSQL(tableloaimonan);
+        String tablemonan = "drop table if exists MonAn";
+        db.execSQL(tablemonan);
 //        String tablehoadon = "drop table if exists HoaDon";
 //        db.execSQL(tablehoadon);
 //        String tablenhacc= "drop table if exists NhaCungCap";

@@ -1,5 +1,9 @@
 package com.example.nhom5_oderfood.FragmentAdmin;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,9 +12,12 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -29,6 +36,7 @@ import com.example.nhom5_oderfood.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -152,6 +160,26 @@ public class MainAdminActivity extends AppCompatActivity {
     }
 
     private void pickThuVienFuntion() {
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        galleryActivityResult.launch(intent);
     }
+
+    private ActivityResultLauncher<Intent> galleryActivityResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+        @Override
+        public void onActivityResult(ActivityResult o) {
+            if (o.getResultCode() == Activity.RESULT_OK) {
+                Intent intent = o.getData();
+
+                img_uri = intent.getData();
+
+                try {
+                    Picasso.get().load(img_uri).placeholder(R.drawable.baseline_edit_24).error(R.drawable.baseline_edit_24).into(imganh);
+                }catch (Exception e){
+                    Log.d("Tag", "onActivityResultLaucher: k load được ảnh" + e.getMessage());
+                }
+            }
+        }
+    });
 
 }
