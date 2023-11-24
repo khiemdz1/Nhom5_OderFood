@@ -79,7 +79,9 @@ public class ThayDoiTT extends AppCompatActivity {
                     diachii = diachi.getText().toString();
                     boolean check = khachHangDAO.UpdateUser(id,namee,sdtt,diachii);
                     if (check) {
-                        Snackbar.make(view, "Lưu thành công", Snackbar.LENGTH_SHORT).show();
+                        Toast.makeText(ThayDoiTT.this, "Vui Lòng Đăng Nhập Lại", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(ThayDoiTT.this, LoginActivity.class);
+                        startActivity(intent);
                     } else {
                         Snackbar.make(view, "Lưu Thất Bại", Snackbar.LENGTH_SHORT).show();
                     }
@@ -91,7 +93,7 @@ public class ThayDoiTT extends AppCompatActivity {
                     fullname.setTextColor(ContextCompat.getColor(view.getContext(), R.color.xam));
                     sdt.setTextColor(ContextCompat.getColor(view.getContext(), R.color.xam));
                     diachi.setTextColor(ContextCompat.getColor(view.getContext(), R.color.xam));
-                    Snackbar.make(view, "điền vào ô cần sửa", Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(view, "Vui Lòng Điền Đủ Thông Tin Và Chĩnh Xác", Snackbar.LENGTH_LONG).show();
                     edit.setText("Lưu");
                 }
                 isEditing = !isEditing;

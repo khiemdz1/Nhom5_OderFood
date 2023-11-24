@@ -67,39 +67,6 @@ public class KhachHangDAO {
         db.close();
         return password;
     }
-//    @SuppressLint("Range")
-//    public ArrayList<khachhang> GetAccount() {
-//        ArrayList<khachhang> list_kh = new ArrayList<>();
-//        String[] selectionArgs = {"maKH"};
-//        Cursor cursor = db.rawQuery("SELECT * FROM KhachHang WHERE MaKH = ?", selectionArgs);
-//        if (cursor.moveToFirst()) {
-//            do {
-//                khachhang kh = new khachhang();
-//                kh.setUsername(cursor.getString(cursor.getColumnIndex("Username")));
-//                kh.setPassword(cursor.getString(cursor.getColumnIndex("Password")));
-//                kh.setFullname(cursor.getString(cursor.getColumnIndex("Fullname")));
-//                kh.setSdt(cursor.getString(cursor.getColumnIndex("Sdt")));
-//                kh.setDiachi(cursor.getString(cursor.getColumnIndex("Diachi")));
-//                list_kh.add(kh);
-//            } while (cursor.moveToNext());
-//        }
-//        cursor.close();
-//        return list_kh;
-//    }
-     //lấy fullname
-//    @SuppressLint("Range")
-//    public String fetchDataName(int userId) {
-//        SQLiteDatabase db = database.getReadableDatabase();
-//        String result = "";
-//        Cursor cursor = db.rawQuery("SELECT Fullname FROM KhachHang WHERE MaKH = ?", new String[]{String.valueOf(userId)});
-//        if (cursor.getCount() > 0) {
-//            cursor.moveToFirst();
-//            result = cursor.getString(cursor.getColumnIndex("Fullname"));
-//        }
-//        cursor.close();
-//        db.close();
-//        return result;
-//    }
 @SuppressLint("Range")
 public khachhang fetchData(int userId) {
     SQLiteDatabase db = database.getReadableDatabase();
