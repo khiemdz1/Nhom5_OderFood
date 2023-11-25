@@ -1,6 +1,7 @@
 package com.example.nhom5_oderfood.AdapterAdmin;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +15,14 @@ import java.util.ArrayList;
 
 public class SpinnerTheloai extends BaseAdapter {
     private Context context;
-    private ArrayList<Theloai> list_tl;
-
+    ArrayList<Theloai> list_tl;
     public SpinnerTheloai(Context context, ArrayList<Theloai> list_tl) {
         this.context = context;
         this.list_tl = list_tl;
+    }
+
+    public Theloai getSelectedItem(int position) {
+        return list_tl.get(position);
     }
 
     private class ViewHolder {
