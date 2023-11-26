@@ -22,6 +22,7 @@
               android:layout_weight="1"
               android:text="Mã Hóa Đơn:"/>
           <TextView
+              android:textStyle="bold"
               android:id="@+id/tv_maHD"
               android:textSize="18dp"
               android:layout_width="0dp"
@@ -141,6 +142,7 @@
             android:layout_weight="1"
             android:text="Ngày Đặt Hàng:"/>
         <TextView
+            android:id="@+id/tv_ngaydatHD"
             android:textSize="18dp"
             android:layout_marginTop="5dp"
             android:layout_width="0dp"

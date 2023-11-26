@@ -39,13 +39,17 @@ public class MyDbhelper extends SQLiteOpenHelper {
 
         // Bảng Hóa Đơn
         String Tablehoadon = "CREATE TABLE HoaDon(" +
-                "MaHD INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "MaHD TEXT NOT NULL," +
                 "TenHD TEXT NOT NULL," +
                 "SdtHD TEXT NOT NULL," +
                 "DiachiHD TEXT NOT NULL," +
                 "TenmonanHD TEXT NOT NULL," +
                 "SoluongHD TEXT NOT NULL," +
-                "GiaHD TEXT NOT NULL)";
+                "NgaydatHD TEXT NOT NULL," +
+                "GiaHD TEXT NOT NULL," +
+                "MaKH INTEGER," +
+                "FOREIGN KEY (MaKH) REFERENCES KhachHang(MaKH))";
         db.execSQL(Tablehoadon);
         // Bảng nhà cung cấp
         String Tablenhacc = "CREATE TABLE NhaCungCap(" +
@@ -62,7 +66,7 @@ public class MyDbhelper extends SQLiteOpenHelper {
                 "(4,'anhmonan4','Hamburger',1,77000,'Hamburger (tiếng Việt đọc là hăm-bơ-gơ hay hem-bơ-gơ, tiếng Anh:/ˈhæmbɜrɡər/, tiếng Đức: /ˈhɛmˌbœːɐ̯ɡɐ/ hoặc /ˈhamˌbʊʁɡɐ/) là một loại thức ăn bao gồm bánh mì kẹp thịt xay (thường là thịt bò) ở giữa. Miếng thịt có thể được nướng, chiên, hun khói hay nướng trên lửa.')," +
                 "(5,'nuocuong1','CoCa CoLa',2,12000,'CoCa Là loại nước ngọt được nhiều người yêu thích với hương vị thơm ngon, sảng khoái. Nước ngọt Coca Plus là dòng sản phẩm nước uống có ga không đường, bổ sung thêm chất dinh dưỡng. Lưu trữ, bảo quản: - Bảo quản nơi thoáng mát, tránh ánh nắng trực tiếp.')," +
                 "(6,'nuocuong2','Pepsi',2,12000,'Pepsi một đồ uống giải khát có gas, lần đầu tiên được sản xuất bởi Caleb Bradham. Ban đầu, Ông pha chế ra một loại nước uống dễ hấp thụ làm từ nước cacbonat, đường, vani và một ít dầu ăn dưới tên “Nước uống của Brad\" năm 1892.')");
-        db.execSQL("INSERT INTO KhachHang VALUES (1,'admin','admin','Can Gia Khiem',0372858655,'HaNoi')");
+        db.execSQL("INSERT INTO KhachHang VALUES (1,'admin','admin','Cấn Gia Khiêm',0372858655,'BinhPhu,ThachThat,HaNoi')");
 
         db.execSQL("Insert Into TheLoai values(1,'Đồ ăn'),(2,'Đồ uống')");
     }
@@ -75,10 +79,10 @@ public class MyDbhelper extends SQLiteOpenHelper {
         db.execSQL(tableloaimonan);
         String tablemonan = "drop table if exists MonAn";
         db.execSQL(tablemonan);
-//        String tablehoadon = "drop table if exists HoaDon";
-//        db.execSQL(tablehoadon);
-//        String tablenhacc= "drop table if exists NhaCungCap";
-//        db.execSQL(tablenhacc);
+        String tablehoadon = "drop table if exists HoaDon";
+        db.execSQL(tablehoadon);
+        String tablenhacc= "drop table if exists NhaCungCap";
+        db.execSQL(tablenhacc);
 
         onCreate(db);
     }

@@ -17,14 +17,14 @@ public class HoaDonDAO {
     public HoaDonDAO(Context context){
         this.dbhelper = new MyDbhelper(context);
     }
-    public ArrayList<HoaDon> getAll() {
+    public ArrayList<HoaDon> getAllByCustomerId(int customerId) {
         ArrayList<HoaDon> list = new ArrayList<>();
         SQLiteDatabase db = dbhelper.getReadableDatabase();
-        Cursor cursor = db.rawQuery("select * from HoaDon", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM HoaDon WHERE MaKH = ? ORDER BY ID DESC", new String[]{String.valueOf(customerId)});
         if (cursor.getCount() != 0) {
             cursor.moveToFirst();
             do {
-                list.add(new HoaDon(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3),cursor.getString(4),cursor.getInt(5),cursor.getInt(6)));
+                list.add(new HoaDon(cursor.getInt(0),cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4),cursor.getString(5),cursor.getInt(6), cursor.getString(7), cursor.getInt(8),cursor.getInt(9)));
             } while (cursor.moveToNext());
         }
         cursor.close();
@@ -34,12 +34,15 @@ public class HoaDonDAO {
     public long addHoadon(HoaDon obj){
         SQLiteDatabase db = dbhelper.getWritableDatabase();
         ContentValues values = new ContentValues();
+        values.put("MaHD", obj.getMaHD());
         values.put("TenHD", obj.getTenkhachhangHD());
         values.put("SdtHD", obj.getSdtkhachhangHD());
         values.put("DiachiHD", obj.getDiachikhachhangHD());
         values.put("TenmonanHD", obj.getTenmonanHD());
         values.put("SoluongHD", obj.getSoluongHD());
+        values.put("NgaydatHD", obj.getNgaydatHD());
         values.put("GiaHD", obj.getGiaHD());
+        values.put("MaKH",obj.getMakh());
         return db.insert("HoaDon", null, values);
     }
 }

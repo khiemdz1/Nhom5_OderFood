@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Context;
 import android.content.Intent;
@@ -62,7 +63,7 @@ public class ThongTinMonAn extends AppCompatActivity{
         gia = intent.getIntExtra("Donngia",0);
         mota = intent.getStringExtra("Mota");
         //ép kiểu
-        String gia2 = String.valueOf(gia);
+        String gia2 = String.format("%,d",gia);
         // set dữ liệu lên text
         tv_ten.setText(ten);
         tv_gia.setText(gia2);
@@ -79,7 +80,7 @@ public class ThongTinMonAn extends AppCompatActivity{
     }
 
     private void OpenBottomSheetDialog() {
-        String gia = tv_gia.getText().toString();
+        String gia = tv_gia.getText().toString().replaceAll(",", "");
         int gia2 = Integer.parseInt(gia);
         MyBottomSheetFrag bottomSheetFrag = new MyBottomSheetFrag();
         Bundle bundle = new Bundle();
@@ -96,5 +97,6 @@ public class ThongTinMonAn extends AppCompatActivity{
         onBackPressed();
         return super.onSupportNavigateUp();
     }
+
 
 }

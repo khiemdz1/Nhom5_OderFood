@@ -31,6 +31,7 @@ public class MyBottomSheetFrag extends BottomSheetDialogFragment{
     String hinhAnh,tenMonAn;
     int donGia;
     int giamoi;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +68,7 @@ public class MyBottomSheetFrag extends BottomSheetDialogFragment{
             int imageResourceId = getResources().getIdentifier(monAn.getHinhMA(), "drawable", getActivity().getPackageName());
             Glide.with(this).load(imageResourceId).into(imageView);
             tv_ten.setText(monAn.getTenMA());
-            tv_gia.setText(String.valueOf(monAn.getGiaMA()));
+            tv_gia.setText(String.format("%,d",monAn.getGiaMA()));
         }
         btn_huy.setOnClickListener(new View.OnClickListener() {
 
@@ -108,16 +109,16 @@ public class MyBottomSheetFrag extends BottomSheetDialogFragment{
                 btn_them.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        AppDatabase db = AppDatabase.getDatabase(getContext());
-                        // Món ăn chưa tồn tại, thực hiện chèn
-                        GioHang gioHang = new GioHang();
-                        gioHang.setHinhanhGH(hinhAnh);
-                        gioHang.setTenGH(tenMonAn);
-                        gioHang.setGiaGH(giamoi);
-                        gioHang.setSoluongGH(dem);
-                        db.gioHangDao().insertMonan(gioHang);
-                        Toast.makeText(getContext(), "Đã thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
-                        bottomSheetDialog.dismiss();
+                            AppDatabase db = AppDatabase.getDatabase(getContext());
+                            // Món ăn chưa tồn tại, thực hiện chèn
+                            GioHang gioHang = new GioHang();
+                            gioHang.setHinhanhGH(hinhAnh);
+                            gioHang.setTenGH(tenMonAn);
+                            gioHang.setGiaGH(giamoi);
+                            gioHang.setSoluongGH(dem);
+                            db.gioHangDao().insertMonan(gioHang);
+                            Toast.makeText(getContext(), "Đã thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
+                            bottomSheetDialog.dismiss();
                     }
                 });
         return bottomSheetDialog;
@@ -126,6 +127,7 @@ public class MyBottomSheetFrag extends BottomSheetDialogFragment{
     private void updateUI() {
         tv_soluong.setText(String.valueOf(dem));
          giamoi = dem * donGia;
-        tv_gia.setText(String.valueOf(giamoi));
+        tv_gia.setText(String.format("%,d",giamoi));
     }
+
 }

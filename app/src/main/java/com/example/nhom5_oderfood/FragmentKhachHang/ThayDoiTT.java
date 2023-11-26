@@ -79,7 +79,7 @@ public class ThayDoiTT extends AppCompatActivity {
                     diachii = diachi.getText().toString();
                     boolean check = khachHangDAO.UpdateUser(id,namee,sdtt,diachii);
                     if (check) {
-                        Toast.makeText(ThayDoiTT.this, "Vui Lòng Đăng Nhập Lại", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ThayDoiTT.this, "Thay Đổi Thông Tin Thành Công", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(ThayDoiTT.this, LoginActivity.class);
                         startActivity(intent);
                     } else {

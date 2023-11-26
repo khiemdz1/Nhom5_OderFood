@@ -38,12 +38,13 @@ public class HoaDonAdapter extends RecyclerView.Adapter<HoaDonAdapter.ViewHodel>
     public void onBindViewHolder(@NonNull ViewHodel holder, int position) {
         HoaDon hoaDon = list.get(position);
         if(hoaDon != null){
-            holder.maHD.setText(String.valueOf(hoaDon.getIdHD()));
+            holder.maHD.setText(hoaDon.getMaHD());
             holder.ten.setText(hoaDon.getTenkhachhangHD());
             holder.sdt.setText(hoaDon.getSdtkhachhangHD());
             holder.diachi.setText(hoaDon.getDiachikhachhangHD());
             holder.monan.setText(hoaDon.getTenmonanHD());
             holder.soluong.setText(String.valueOf(hoaDon.getSoluongHD()));
+            holder.ngaydat.setText(hoaDon.getNgaydatHD());
             holder.tongtien.setText(String.format("%,d",hoaDon.getGiaHD()));
         }
     }
@@ -54,7 +55,7 @@ public class HoaDonAdapter extends RecyclerView.Adapter<HoaDonAdapter.ViewHodel>
     }
 
     public class ViewHodel extends RecyclerView.ViewHolder {
-        TextView maHD,ten,sdt,diachi,monan,soluong,tongtien;
+        TextView maHD,ten,sdt,diachi,monan,soluong,tongtien,ngaydat;
         public ViewHodel(@NonNull View itemView) {
             super(itemView);
           maHD = itemView.findViewById(R.id.tv_maHD);
@@ -63,6 +64,7 @@ public class HoaDonAdapter extends RecyclerView.Adapter<HoaDonAdapter.ViewHodel>
           diachi = itemView.findViewById(R.id.tv_diachiHD);
           monan = itemView.findViewById(R.id.tv_tenmonanHD);
           soluong = itemView.findViewById(R.id.tv_soluongHD);
+          ngaydat = itemView.findViewById(R.id.tv_ngaydatHD);
           tongtien = itemView.findViewById(R.id.tv_tongtienHD);
         }
     }

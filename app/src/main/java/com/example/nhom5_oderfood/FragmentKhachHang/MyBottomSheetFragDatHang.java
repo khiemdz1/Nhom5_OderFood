@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.nhom5_oderfood.Adapter.GioHangAdapter;
 import com.example.nhom5_oderfood.DAO.HoaDonDAO;
@@ -28,8 +29,13 @@ import com.example.nhom5_oderfood.R;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
+import java.security.SecureRandom;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class MyBottomSheetFragDatHang extends BottomSheetDialogFragment {
     Button btn_huy,btn_xacnhan;
@@ -38,6 +44,12 @@ public class MyBottomSheetFragDatHang extends BottomSheetDialogFragment {
     TextView tv_diachi,tv_tenmon,tv_tonggia;
     List<GioHang> gioHangList;
     HoaDonDAO hoaDonDAO;
+    private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    private Frag_GioHang frag_gioHang;
+
+    public void setFrag_gioHang(Frag_GioHang frag_gioHang) {
+        this.frag_gioHang = frag_gioHang;
+    }
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +79,7 @@ public class MyBottomSheetFragDatHang extends BottomSheetDialogFragment {
         List<GioHang> list = gioHangDAO.getlitsMonan();
         StringBuilder thongTinStringBuilder = new StringBuilder();
         for (GioHang item : list) {
-            thongTinStringBuilder.append("Tên: ").append(item.getTenGH())
+            thongTinStringBuilder.append(item.getTenGH())
                     .append("  x").append(item.getSoluongGH())
                     .append("\n");
         }
@@ -82,22 +94,31 @@ public class MyBottomSheetFragDatHang extends BottomSheetDialogFragment {
         int giatong = getGiaTong();
         tv_tonggia.setText(String.format("%,d", giatong));
         int finalTongSoLuong = tongSoLuong;
-
+        //lấy thời gian
+        Date currentDate = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm - dd/MM/yyyy ");
+        String formattedDate = dateFormat.format(currentDate);
+        //mã hóa đơn
+        String randomString = generateRandomString(13);
         btn_xacnhan.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
 
                  HoaDon hoaDon = new HoaDon();
+                 hoaDon.setMaHD(randomString);
                  hoaDon.setTenkhachhangHD(infokh.getFullname());
                  hoaDon.setSdtkhachhangHD(infokh.getSdt());
                  hoaDon.setDiachikhachhangHD(infokh.getDiachi());
                  hoaDon.setTenmonanHD(thongTinStringBuilder.toString());
                  hoaDon.setSoluongHD(finalTongSoLuong);
+                 hoaDon.setNgaydatHD(formattedDate);
                  hoaDon.setGiaHD(giatong);
+                 hoaDon.setMakh(loggedInUserId);
 
                  long result = hoaDonDAO.addHoadon(hoaDon);
                  if (result != -1) {
-                     getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new Frag_HoaDon()).addToBackStack(null).commit();
+                     gioHangDAO.deleteAllGioHang();
+                     frag_gioHang.loadData();
                      Toast.makeText(getContext(), "Đơn hàng đã được đặt thành công", Toast.LENGTH_SHORT).show();
                      dismiss();
                  } else {
@@ -109,6 +130,19 @@ public class MyBottomSheetFragDatHang extends BottomSheetDialogFragment {
             @Override
             public void onClick(View view) {bottomSheetDialog.dismiss();}});
         return bottomSheetDialog;
+    }
+    //random
+    public static String generateRandomString(int length) {
+        StringBuilder randomString = new StringBuilder(length);
+        SecureRandom secureRandom = new SecureRandom();
+
+        for (int i = 0; i < length; i++) {
+            int randomIndex = secureRandom.nextInt(CHARACTERS.length());
+            char randomChar = CHARACTERS.charAt(randomIndex);
+            randomString.append(randomChar);
+        }
+
+        return randomString.toString();
     }
     //lấy tổng giá
     private int getGiaTong() {

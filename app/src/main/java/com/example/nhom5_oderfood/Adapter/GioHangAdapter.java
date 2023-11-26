@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.nhom5_oderfood.DTO.GioHang;
 import com.example.nhom5_oderfood.FragmentKhachHang.databasegiohang.AppDatabase;
+import com.example.nhom5_oderfood.Interface.OnDeleteItemListener;
 import com.example.nhom5_oderfood.R;
 
 import java.util.ArrayList;
@@ -27,6 +28,11 @@ import java.util.List;
 public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.Viewholder>{
     private List<GioHang> list;
     Context context;
+    private OnDeleteItemListener onDeleteItemListener; // Thêm dòng này
+
+    public void setOnDeleteItemListener(OnDeleteItemListener onDeleteItemListener) {
+        this.onDeleteItemListener = onDeleteItemListener;
+    }
 
 
     public void setData(Context context,List<GioHang> list){
@@ -58,17 +64,18 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.Viewhold
         int imageResourceId = context.getResources().getIdentifier(tenAnh, "drawable", context.getPackageName());
         Glide.with(holder.itemView.getContext()).load(imageResourceId).into(holder.imageView);
         holder.tv_ten.setText(gioHang.getTenGH());
-        holder.tv_gia.setText(String.valueOf(gioHang.getGiaGH()));
+        holder.tv_gia.setText(String.format("%,d",gioHang.getGiaGH()));
         holder.tv_soluong.setText(String.valueOf(gioHang.getSoluongGH()));
         holder.btn_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AppDatabase.getDatabase(context).gioHangDao().deleteMonAn(gioHang);
                 list.remove(gioHang);
-               notifyDataSetChanged();
-
+                notifyDataSetChanged();
                 Toast.makeText(context, "Đã xóa", Toast.LENGTH_SHORT).show();
-
+                if (onDeleteItemListener != null) {
+                    onDeleteItemListener.onDeleteItem(gioHang);
+                }
             }
         });
     }

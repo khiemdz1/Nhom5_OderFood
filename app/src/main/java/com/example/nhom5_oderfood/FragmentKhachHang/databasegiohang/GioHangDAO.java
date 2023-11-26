@@ -20,4 +20,7 @@ public interface GioHangDAO {
     void deleteMonAn(GioHang gioHang);
     @Query("SELECT COUNT(*) FROM GioHang WHERE tenGH = :tenGH")
     int checkMonan(String tenGH);
+    @Query("DELETE FROM GioHang")
+    void deleteAllGioHang();
+
 }
