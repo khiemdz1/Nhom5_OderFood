@@ -35,7 +35,6 @@ public class Frag_NhaCungCap extends Fragment {
     }
     public void loatData(){
 
-
         arrayList = nhaCungCapDAO.getDSNCC();
         adapter = new NhaCungCapAdapter(getContext() , arrayList);
         binding.rcvNcc.setAdapter(adapter);
