@@ -35,7 +35,7 @@
             android:layout_height="70dp"
             android:layout_gravity="bottom"
             app:itemIconTint="@color/custom_buttom_nav"
-            app:menu="@menu/menu2" />
+            app:menu="@menu/menubottomadmin" />
 
     </LinearLayout>
 
@@ -46,6 +46,6 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/header_layout"
-        app:menu="@menu/menu" />
+        app:menu="@menu/menunav_viewadmin" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

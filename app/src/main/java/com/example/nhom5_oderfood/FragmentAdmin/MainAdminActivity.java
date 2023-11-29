@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -33,6 +34,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.nhom5_oderfood.Activity.LoginActivity;
 import com.example.nhom5_oderfood.AdapterAdmin.MonAnAdapter_Admin;
 import com.example.nhom5_oderfood.AdapterAdmin.SpinnerTheloai;
 import com.example.nhom5_oderfood.DAO.KhachHangDAO;
@@ -58,11 +60,9 @@ import java.util.ArrayList;
 
 public class MainAdminActivity extends AppCompatActivity {
     static final int Home_Admin = 0;
-    static final int Frag_GiohangAdmin = 1;
-    static final int Frag_HoaDonAdmin = 2;
-    static final int FRAG_FEEDBACKAdmin = 3;
-    static final int FRAG_NHACUNGCAPAdmin = 4;
-    static final int FRAG_CAIDATAdmin = 5;
+    static final int Frag_HoaDonAdmin = 1;
+    static final int FRAG_NHACUNGCAPAdmin = 2;
+    static final int FRAG_CAIDATAdmin = 3;
     int mCurrentFrag = Home_Admin;
     Toolbar toolbar;
     NavigationView nagView;
@@ -104,23 +104,11 @@ public class MainAdminActivity extends AppCompatActivity {
                         mCurrentFrag = Home_Admin;
                         bottomNavigationView.getMenu().findItem(R.id.menuHOME2).setChecked(true);
                     }
-                }else if(id == R.id.menuGIOHANG){
-                    if (mCurrentFrag != Frag_GiohangAdmin) {
-                        relaceFrg(new GiohangAdminFragment());
-                        mCurrentFrag = Frag_GiohangAdmin;
-                        bottomNavigationView.getMenu().findItem(R.id.menuGIOHANG2).setChecked(true);
-                    }
                 }else if(id == R.id.menuHOADON){
                     if (mCurrentFrag != Frag_HoaDonAdmin) {
                         relaceFrg(new HoadonAdminFragment());
                         mCurrentFrag = Frag_HoaDonAdmin;
                         bottomNavigationView.getMenu().findItem(R.id.menuHOADON2).setChecked(true);
-                    }
-                }else if(id == R.id.menuFEEDBACK){
-                    if (mCurrentFrag != FRAG_FEEDBACKAdmin) {
-                        relaceFrg(new FeedbackAdminFragment());
-                        mCurrentFrag = FRAG_FEEDBACKAdmin;
-                        bottomNavigationView.getMenu().findItem(R.id.menuFEEDBACK2).setChecked(true);
                     }
                 }else if(id == R.id.menuNHACUNGCAP){
                     if (mCurrentFrag != FRAG_NHACUNGCAPAdmin) {
@@ -128,10 +116,24 @@ public class MainAdminActivity extends AppCompatActivity {
                         mCurrentFrag = FRAG_NHACUNGCAPAdmin;
                     }
                 }else if(id == R.id.menuCAIDAT){
-                    if (mCurrentFrag != FRAG_CAIDATAdmin) {
-                        relaceFrg(new CaiDatAdminFragment());
-                        mCurrentFrag = FRAG_CAIDATAdmin;
-                    }
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainAdminActivity.this);
+                    builder.setTitle("Đăng xuất")
+                            .setMessage("Bạn có muốn đăng xuất không")
+                            .setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    startActivity(new Intent(MainAdminActivity.this, LoginActivity.class));
+                                }
+                            })
+                            .setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            });
+
+                    Dialog dialog = builder.create();
+                    dialog.show();
                 }
                 drawerLayout.close();
                 return true;
@@ -145,15 +147,12 @@ public class MainAdminActivity extends AppCompatActivity {
                 if (id == R.id.menuHOME2){
                     relaceFrg(new Home_Admin());
                     nagView.setCheckedItem(R.id.menuHOME);
-                }else if(id == R.id.menuGIOHANG2){
-                    relaceFrg(new GiohangAdminFragment());
-                    nagView.setCheckedItem(R.id.menuGIOHANG2);
                 }else if(id == R.id.menuHOADON2){
                     relaceFrg(new HoadonAdminFragment());
                     nagView.setCheckedItem(R.id.menuHOADON2);
-                }else {
-                    relaceFrg(new FeedbackAdminFragment());
-                    nagView.setCheckedItem(R.id.menuFEEDBACK2);
+                }else if(id == R.id.menuNHACUNGCAP){
+                    relaceFrg(new NhacungcapAdminFragment());
+                    nagView.setCheckedItem(R.id.menuNHACUNGCAP);
                 }
                 return true;
             }

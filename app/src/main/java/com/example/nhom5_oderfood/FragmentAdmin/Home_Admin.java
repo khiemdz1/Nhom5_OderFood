@@ -152,12 +152,34 @@ public class Home_Admin extends Fragment {
                 String moTa = edtMoTa.getText().toString();
                 Theloai tenTheloai = (Theloai) spinner.getSelectedItem();
                 int id_tl = Integer.parseInt(tenTheloai.getMaTL());
+
+                // Kiểm tra dữ liệu trống
+                if (tenMonan.isEmpty() || giaTien.isEmpty() || moTa.isEmpty()) {
+                    Toast.makeText(getContext(), "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Kiểm tra giá trị giá tiền
+                int giaTienValue;
+                try {
+                    giaTienValue = Integer.parseInt(giaTien);
+                } catch (NumberFormatException e) {
+                    Toast.makeText(getContext(), "Giá tiền không hợp lệ", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (giaTienValue <= 0) {
+                    Toast.makeText(getContext(), "Giá tiền phải lớn hơn 0", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 MonAn monAn = new MonAn();
                 monAn.setHinhMA(selectedImagePath);
                 monAn.setLoaiMA(id_tl);
                 monAn.setTenMA(tenMonan);
-                monAn.setGiaMA(Integer.parseInt(giaTien));
+                monAn.setGiaMA(giaTienValue);
                 monAn.setMotaMA(moTa);
+
 
                 long result = monAnDAO.insertMonAn(monAn);
 

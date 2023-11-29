@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/menuHOME2"
+        android:title="Home"
+        android:icon="@drawable/iconhome"/>
+    <item android:id="@+id/menuHOADON2"
+        android:title="Hóa Đơn"
+        android:icon="@drawable/invoice"/>
+    <item android:id="@+id/menuNHACUNGCAP"
+        android:title="Nhà Cung Cấp"
+        android:icon="@drawable/parcel"/>
+</menu>
