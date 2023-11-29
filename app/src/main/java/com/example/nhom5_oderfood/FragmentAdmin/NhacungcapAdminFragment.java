@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 
+import android.telephony.PhoneNumberUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -92,7 +93,7 @@ public class NhacungcapAdminFragment extends Fragment {
             public void onClick(View view) {
                 NhaCungCap nhaCungCap = new NhaCungCap();
 
-                tenncc= ten.getText().toString();
+                tenncc = ten.getText().toString();
                 thongtin = tt.getText().toString();
                 lienhe = lhe.getText().toString();
                 Email = email.getText().toString();
@@ -101,21 +102,27 @@ public class NhacungcapAdminFragment extends Fragment {
                 nhaCungCap.setThongTin(thongtin);
                 nhaCungCap.setLienHe(lienhe);
                 nhaCungCap.setEmail(Email);
-                boolean check = nhaCungCapDAO.addNCC(nhaCungCap);
-                if (ten.length() == 0 || tt.length() == 0 || lhe.length() == 0 || email.length() == 0){
+
+                if (ten.length() == 0 || tt.length() == 0 || lhe.length() == 0 || email.length() == 0) {
                     Toast.makeText(getContext(), "Hãy nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
-                } else if (check) {
+                } else if (!validatePhoneNumber(lienhe)) {
+                    lhe.setError("Vui lòng nhập đúng định dạng");
+                } else if (!validateEmail(Email)) {
+                    email.setError("Vui lòng nhập đúng định dạng");
+                } else {
+                    if (nhaCungCapDAO.addNCC(nhaCungCap)) {
                         Toast.makeText(getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
                         loatData();
                         dialog.dismiss();
                     } else {
                         Toast.makeText(getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
                     }
-
+                }
             }
         });
 
     }
+
     private static final String EMAIL_PATTERN =
             "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" +
                     "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
@@ -126,4 +133,18 @@ public class NhacungcapAdminFragment extends Fragment {
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
     }
+
+
+
+        private static final String PHONE_NUMBER_PATTERN =
+                "^(\\+\\d{1,3}[- ]?)?\\(?\\d{1,6}\\)?[-.\\s]?\\d{1,15}$";
+
+        private static final Pattern pattern1 = Pattern.compile(PHONE_NUMBER_PATTERN);
+
+        public static boolean validatePhoneNumber(String phoneNumber) {
+            Matcher matcher = pattern1.matcher(phoneNumber);
+            return matcher.matches();
+
+    }
+
 }
