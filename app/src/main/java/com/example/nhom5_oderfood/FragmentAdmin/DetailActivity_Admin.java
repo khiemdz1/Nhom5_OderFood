@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.bumptech.glide.Glide;
 import com.example.nhom5_oderfood.R;
 
 public class DetailActivity_Admin extends AppCompatActivity {
@@ -35,11 +36,16 @@ public class DetailActivity_Admin extends AppCompatActivity {
 
         // Nhận dữ liệu từ Intent
         Intent intent = getIntent();
+        String hinhanh = intent.getStringExtra("hinhanh");
         String tenMonan = intent.getStringExtra("tenMonan");
         int donGia = intent.getIntExtra("donGia", 0);
         String moTa = intent.getStringExtra("moTa");
 
         // Gắn dữ liệu vào các TextView
+
+        Glide.with(this)
+                .load(hinhanh)
+                .into(imgMonan);
         txtTenMonan.setText("Tên món ăn: " + tenMonan);
         txtDonGia.setText(String.valueOf(donGia) + "VNĐ");
         txtMoTa.setText(moTa);

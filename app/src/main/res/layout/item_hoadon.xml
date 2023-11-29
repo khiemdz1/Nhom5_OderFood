@@ -177,6 +177,7 @@
             android:layout_weight="1"
             android:gravity="end"
             android:text="abc"
+            android:textColor="#FF0000"
             android:textSize="25dp"
             android:textStyle="bold" />
         <TextView
@@ -185,6 +186,7 @@
             android:layout_marginTop="5dp"
             android:layout_width="0dp"
             android:layout_weight="1"
+            android:textColor="#FF0000"
             android:layout_height="wrap_content"
             android:text="VNĐ"/>
     </LinearLayout>

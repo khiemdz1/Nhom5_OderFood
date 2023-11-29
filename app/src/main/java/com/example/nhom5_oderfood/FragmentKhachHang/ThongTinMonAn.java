@@ -55,8 +55,9 @@ public class ThongTinMonAn extends AppCompatActivity{
         // lấy ảnh và load ảnh bằng glide
         Intent intent = getIntent();
         anh = intent.getStringExtra("Hinhanh");
-        int imageResourceId = this.getResources().getIdentifier(anh, "drawable", this.getPackageName());
-        Glide.with(this).load(imageResourceId).into(imageView);
+        Glide.with(this)
+                .load(anh)
+                .into(imageView);
         // lấy tên
         ten = intent.getStringExtra("Tenmonan");
         //lấy giá

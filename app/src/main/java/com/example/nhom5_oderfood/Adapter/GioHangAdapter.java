@@ -28,7 +28,7 @@ import java.util.List;
 public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.Viewholder>{
     private List<GioHang> list;
     Context context;
-    private OnDeleteItemListener onDeleteItemListener; // Thêm dòng này
+    private OnDeleteItemListener onDeleteItemListener;
 
     public void setOnDeleteItemListener(OnDeleteItemListener onDeleteItemListener) {
         this.onDeleteItemListener = onDeleteItemListener;
@@ -61,8 +61,9 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.Viewhold
             return;
         }
         String tenAnh = gioHang.getHinhanhGH();
-        int imageResourceId = context.getResources().getIdentifier(tenAnh, "drawable", context.getPackageName());
-        Glide.with(holder.itemView.getContext()).load(imageResourceId).into(holder.imageView);
+        Glide.with(context)
+                .load(tenAnh)
+                .into(holder.imageView);
         holder.tv_ten.setText(gioHang.getTenGH());
         holder.tv_gia.setText(String.format("%,d",gioHang.getGiaGH()));
         holder.tv_soluong.setText(String.valueOf(gioHang.getSoluongGH()));
