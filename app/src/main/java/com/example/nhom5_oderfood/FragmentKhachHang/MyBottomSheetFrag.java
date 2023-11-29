@@ -65,8 +65,9 @@ public class MyBottomSheetFrag extends BottomSheetDialogFragment{
         btn_cong = view.findViewById(R.id.btn_cong);
         // set dữ liệu lên buttomsheetdialog
         if (monAn != null) {
-            int imageResourceId = getResources().getIdentifier(monAn.getHinhMA(), "drawable", getActivity().getPackageName());
-            Glide.with(this).load(imageResourceId).into(imageView);
+            Glide.with(this)
+                    .load(hinhAnh)
+                    .into(imageView);
             tv_ten.setText(monAn.getTenMA());
             tv_gia.setText(String.format("%,d",monAn.getGiaMA()));
         }

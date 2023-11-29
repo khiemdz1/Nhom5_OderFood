@@ -1,7 +1,9 @@
 package com.example.nhom5_oderfood.FragmentKhachHang;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +12,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,42 +38,41 @@ public class Frag_Home extends Fragment {
     MonAnAdapter monAnAdapter;
     androidx.appcompat.widget.SearchView searchView;
     MonAnDAO monAnDAO;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Context context = getContext();
         View view =  inflater.inflate(R.layout.frag_home,container,false);
-         imageSlider = view.findViewById(R.id.image_slider);
-        List<SlideModel> slideModels = new ArrayList<>();
-        slideModels.add(new SlideModel(R.drawable.banner2, ScaleTypes.FIT));
-        slideModels.add(new SlideModel(R.drawable.banner1, ScaleTypes.FIT));
-        slideModels.add(new SlideModel(R.drawable.banner3, ScaleTypes.FIT));
-        imageSlider.setImageList(slideModels);
-        imageSlider.setSlideAnimation(AnimationTypes.ZOOM_OUT);
-        searchView = view.findViewById(R.id.search);
-        imageSlider.startSliding(4000);
-        rcv = view.findViewById(R.id.rcv_view);
-        monAnDAO = new MonAnDAO(getContext());
-        list = monAnDAO.getAll();
-        list2 = monAnDAO.getAll();
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
+            imageSlider = view.findViewById(R.id.image_slider);
+            List<SlideModel> slideModels = new ArrayList<>();
+            slideModels.add(new SlideModel(R.drawable.banner2, ScaleTypes.FIT));
+            slideModels.add(new SlideModel(R.drawable.banner1, ScaleTypes.FIT));
+            slideModels.add(new SlideModel(R.drawable.banner3, ScaleTypes.FIT));
+            imageSlider.setImageList(slideModels);
+            imageSlider.setSlideAnimation(AnimationTypes.ZOOM_OUT);
+            searchView = view.findViewById(R.id.search);
+            imageSlider.startSliding(4000);
+            rcv = view.findViewById(R.id.rcv_view);
+            monAnDAO = new MonAnDAO(getContext());
+            list = monAnDAO.getAll();
+            list2 = monAnDAO.getAll();
+            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    return false;
+                }
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                filter(newText);
-                return true;
-            }
-        });
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(context,2);
-        rcv.setLayoutManager(gridLayoutManager);
-
-
-        monAnAdapter = new MonAnAdapter(getContext(),list);
-        rcv.setAdapter(monAnAdapter);
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    filter(newText);
+                    return true;
+                }
+            });
+            GridLayoutManager gridLayoutManager = new GridLayoutManager(context,2);
+            rcv.setLayoutManager(gridLayoutManager);
+            monAnAdapter = new MonAnAdapter(getContext(),list);
+            rcv.setAdapter(monAnAdapter);
 
         monAnAdapter.setItemClickListener(new ItemClickListener() {
             @Override

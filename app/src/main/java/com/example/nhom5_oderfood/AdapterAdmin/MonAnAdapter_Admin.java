@@ -1,9 +1,15 @@
 package com.example.nhom5_oderfood.AdapterAdmin;
 
+import static android.app.Activity.RESULT_OK;
+import static androidx.core.app.ActivityCompat.startActivityForResult;
+
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,13 +22,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.nhom5_oderfood.DAO.MonAnDAO;
 import com.example.nhom5_oderfood.DAO.TheloaiDAO;
 import com.example.nhom5_oderfood.DTO.MonAn;
 import com.example.nhom5_oderfood.DTO.Theloai;
 import com.example.nhom5_oderfood.FragmentAdmin.DetailActivity_Admin;
+import com.example.nhom5_oderfood.FragmentAdmin.Home_Admin;
 import com.example.nhom5_oderfood.R;
 import com.squareup.picasso.Picasso;
 
@@ -32,7 +42,12 @@ public class MonAnAdapter_Admin extends RecyclerView.Adapter<MonAnAdapter_Admin.
     private Context context;
     private ArrayList<MonAn> monAnList;
 
+    private Home_Admin home_admin;
 
+
+    public void setHome_admin (Home_Admin homeAdmin){
+        this.home_admin = homeAdmin;
+    }
     public MonAnAdapter_Admin(Context context, ArrayList<MonAn> monAnList) {
         this.context = context;
         this.monAnList = monAnList;
@@ -48,8 +63,12 @@ public class MonAnAdapter_Admin extends RecyclerView.Adapter<MonAnAdapter_Admin.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         MonAn monAn = monAnList.get(position);
+        String tenAnh = monAn.getHinhMA();
+        Glide.with(context)
+                .load(tenAnh)
+                .into(holder.ImgAnh);
         holder.txt_tenma.setText(monAn.getTenMA());
-        holder.txt_dongia.setText(String.valueOf(monAn.getGiaMA()));
+        holder.txt_dongia.setText(String.format("%,d",monAn.getGiaMA()));
 
 //        String img = monAn.getHinhMA();
 //        Picasso.get().load(img).into(holder.ImgAnh);
@@ -80,8 +99,8 @@ public class MonAnAdapter_Admin extends RecyclerView.Adapter<MonAnAdapter_Admin.
 
                     // Tạo Intent để chuyển đến DetailActivity
                     Intent intent = new Intent(context, DetailActivity_Admin.class);
-
                     // Đính kèm dữ liệu món ăn cần hiển thị chi tiết
+                    intent.putExtra("hinhanh",monAn.getHinhMA());
                     intent.putExtra("tenMonan", monAn.getTenMA());
                     intent.putExtra("donGia", monAn.getGiaMA());
                     intent.putExtra("moTa", monAn.getMotaMA());
@@ -137,6 +156,7 @@ public class MonAnAdapter_Admin extends RecyclerView.Adapter<MonAnAdapter_Admin.
                     EditText edtGiaTien = dialogView.findViewById(R.id.edt_giatien_ud);
                     EditText edtMoTa = dialogView.findViewById(R.id.edt_mota_ud);
                     Button btnLuu = dialogView.findViewById(R.id.btnud_monan);
+                    ImageView imageView = dialogView.findViewById(R.id.imganh_ud);
                     Spinner spinner = dialogView.findViewById(R.id.spinnertl);
 
                     TheloaiDAO theloaiDAO = new TheloaiDAO(context);
@@ -147,11 +167,20 @@ public class MonAnAdapter_Admin extends RecyclerView.Adapter<MonAnAdapter_Admin.
                     // Lấy thông tin món ăn được chọn
                     int position = getAdapterPosition();
                     MonAn selectedMonAn = monAnList.get(position);
-
                     // Thiết lập dữ liệu hiện tại của món ăn vào các view
                     edtTenMonAn.setText(selectedMonAn.getTenMA());
                     edtGiaTien.setText(String.valueOf(selectedMonAn.getGiaMA()));
                     edtMoTa.setText(selectedMonAn.getMotaMA());
+                    String tenAnh = selectedMonAn.getHinhMA();
+                    Glide.with(context)
+                            .load(tenAnh)
+                            .into(imageView);
+                    imageView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                              home_admin.readstogare();
+                            }
+                    });
 
                     // Xử lý sự kiện khi người dùng nhấn nút "Lưu"
                     btnLuu.setOnClickListener(new View.OnClickListener() {
@@ -183,6 +212,7 @@ public class MonAnAdapter_Admin extends RecyclerView.Adapter<MonAnAdapter_Admin.
                     dialog.show();
                 }
             });
+
         }
     }
 }

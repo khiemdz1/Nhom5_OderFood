@@ -18,7 +18,7 @@
             android:id="@+id/toolbar_admin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#EA6F66"
+            android:background="#FF5722"
             app:titleTextColor="@color/white" />
 
         <!-- FrameLayout -->
@@ -34,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_gravity="bottom"
-            app:itemIconTint="#FF5722"
+            app:itemIconTint="@color/custom_buttom_nav"
             app:menu="@menu/menu2" />
 
     </LinearLayout>
