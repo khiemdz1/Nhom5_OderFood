@@ -14,8 +14,7 @@ public class MyDbhelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
       // bảng khách hàng
-        String Tablekhachhang = "CREATE TABLE KhachHang(" +
-                "MaKH INTEGER PRIMARY KEY AUTOINCREMENT," +
+        String Tablekhachhang = "CREATE TABLE KhachHang(" + "MaKH INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "Username TEXT NOT NULL," +
                 "Password TEXT NOT NULL," +
                 "Fullname TEXT NOT NULL," +
@@ -36,7 +35,6 @@ public class MyDbhelper extends SQLiteOpenHelper {
                 "Dongia INTEGER NOT NULL," +
                 "Mota TEXT NOT NULL)";
         db.execSQL(Tablemonan);
-
         // Bảng Hóa Đơn
         String Tablehoadon = "CREATE TABLE HoaDon(" +
                 "ID INTEGER PRIMARY KEY AUTOINCREMENT," +

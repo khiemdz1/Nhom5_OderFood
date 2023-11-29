@@ -40,7 +40,6 @@ public class NhaCungCapAdminAdapter extends RecyclerView.Adapter<NhaCungCapAdmin
         this.context = context;
         this.arrayList = arrayList;
 
-
     }
 
     @NonNull
@@ -138,6 +137,10 @@ public class NhaCungCapAdminAdapter extends RecyclerView.Adapter<NhaCungCapAdmin
             @Override
             public void onClick(View v) {
 
+                String tenncc = ten.getText().toString();
+                String Thongtin = thongtin.getText().toString();
+                String Lienhe = lienhe.getText().toString();
+                String Email = email.getText().toString();
 
                 nhaCungCap.setTenNhaCC(ten.getText().toString());
                 nhaCungCap.setThongTin(thongtin.getText().toString());
@@ -146,18 +149,50 @@ public class NhaCungCapAdminAdapter extends RecyclerView.Adapter<NhaCungCapAdmin
 
                     NhaCungCapDAO nhaCungCapDAO = new NhaCungCapDAO(context);
                     boolean check = nhaCungCapDAO.updateNCC(nhaCungCap);
+
+                if (ten.length() == 0 || thongtin.length() == 0 || lienhe.length() == 0 || email.length() == 0) {
+                    Toast.makeText(context, "Hãy nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+                } else if (!validatePhoneNumber(Lienhe)) {
+                    lienhe.setError("Vui lòng nhập đúng định dạng");
+                } else if (!validateEmail(Email)) {
+                    email.setError("Vui lòng nhập đúng định dạng");
+                } else {
                     if (check) {
-                        Toast.makeText(context, "chỉnh sửa thành công", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Sửa thành công", Toast.LENGTH_SHORT).show();
                         arrayList.clear();
                         arrayList = nhaCungCapDAO.getDSNCC();
                         notifyDataSetChanged();
                         alertDialog.dismiss();
                     } else {
-                        Toast.makeText(context, "chỉnh sửa thất bại", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Sửa thất bại", Toast.LENGTH_SHORT).show();
                     }
+                }
                 }
 
         });
 
 }
+    private static final String EMAIL_PATTERN =
+            "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" +
+                    "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+
+    private static final Pattern pattern = Pattern.compile(EMAIL_PATTERN);
+
+    public static boolean validateEmail(final String email) {
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
+
+
+
+    private static final String PHONE_NUMBER_PATTERN =
+            "^(\\+\\d{1,3}[- ]?)?\\(?\\d{1,6}\\)?[-.\\s]?\\d{1,15}$";
+
+    private static final Pattern pattern1 = Pattern.compile(PHONE_NUMBER_PATTERN);
+
+    public static boolean validatePhoneNumber(String phoneNumber) {
+        Matcher matcher = pattern1.matcher(phoneNumber);
+        return matcher.matches();
+
+    }
 }
