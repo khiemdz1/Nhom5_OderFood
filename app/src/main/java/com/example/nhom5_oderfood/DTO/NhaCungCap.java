@@ -11,6 +11,12 @@ public class NhaCungCap implements Serializable {
 
     public NhaCungCap() {
     }
+    public NhaCungCap(String tenNCC, String thongTinNCC, String lienheNCC, String emailNCC){
+        this.tenNhaCC = tenNCC;
+        this.thongTin = thongTinNCC;
+        this.lienHe = lienheNCC;
+        this.email = emailNCC;
+    }
 
     public NhaCungCap(int maNCC, String tenNhaCC, String thongTin, String lienHe, String email) {
         this.maNCC = maNCC;

@@ -34,7 +34,7 @@ public class Frag_FeedBack extends Fragment {
                 //xây dựng URI (Uniform Resource Identifier) cho đối tượng Intent.
                 //URI "mailto" với địa chỉ email, chủ đề là "Feedback"
                 String UriText = "mailto:" + Uri.encode("quangnd1307@gmail.com") +"?subject="
-                        + Uri.encode("Feedback") +"$body=" + Uri.encode("");
+                        + Uri.encode("Feedback") + Uri.encode("");
                 Uri uri = Uri.parse(UriText);
                 intent.setData(uri);
                 startActivity(Intent.createChooser(intent,"send email"));
