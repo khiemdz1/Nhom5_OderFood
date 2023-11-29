@@ -6,8 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.example.nhom5_oderfood.DTO.HoaDon;
-import com.example.nhom5_oderfood.DTO.MonAn;
-import com.example.nhom5_oderfood.DTO.khachhang;
 import com.example.nhom5_oderfood.Dbhelper.MyDbhelper;
 
 import java.util.ArrayList;
@@ -44,5 +42,28 @@ public class HoaDonDAO {
         values.put("GiaHD", obj.getGiaHD());
         values.put("MaKH",obj.getMakh());
         return db.insert("HoaDon", null, values);
+    }
+
+    public ArrayList<HoaDon> getAllHoaDon() {
+        ArrayList<HoaDon> list = new ArrayList<>();
+        SQLiteDatabase db = dbhelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery("select * from HoaDon", null);
+        if (cursor.getCount() != 0) {
+            cursor.moveToFirst();
+            do {
+                list.add(new HoaDon(cursor.getInt(0),cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4),cursor.getString(5),cursor.getInt(6), cursor.getString(7), cursor.getInt(8),cursor.getInt(9)));
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return list;
+    }
+
+    public int DeleteHoaDon(HoaDon obj) {
+        SQLiteDatabase db = dbhelper.getWritableDatabase();
+
+        String[] condition = new String[]{String.valueOf(obj.getIdHD())};
+
+        return db.delete("HoaDon", "id =? ", condition);
     }
 }

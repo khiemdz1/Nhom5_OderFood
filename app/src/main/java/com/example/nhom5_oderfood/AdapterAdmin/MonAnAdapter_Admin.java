@@ -41,7 +41,7 @@ import java.util.ArrayList;
 public class MonAnAdapter_Admin extends RecyclerView.Adapter<MonAnAdapter_Admin.ViewHolder> {
     private Context context;
     private ArrayList<MonAn> monAnList;
-
+    private Uri selectedImageUri;
     private Home_Admin home_admin;
 
 
@@ -178,8 +178,8 @@ public class MonAnAdapter_Admin extends RecyclerView.Adapter<MonAnAdapter_Admin.
                     imageView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                              home_admin.readstogare();
-                            }
+                            home_admin.readstogare();
+                        }
                     });
 
                     // Xử lý sự kiện khi người dùng nhấn nút "Lưu"
@@ -188,9 +188,30 @@ public class MonAnAdapter_Admin extends RecyclerView.Adapter<MonAnAdapter_Admin.
                         public void onClick(View v) {
                             // Lấy thông tin đã chỉnh sửa từ các view
                             String tenMonAn = edtTenMonAn.getText().toString();
-                            int giaTien = Integer.parseInt(edtGiaTien.getText().toString());
+                            String giaTienStr = edtGiaTien.getText().toString();
                             String moTa = edtMoTa.getText().toString();
                             Theloai selectedTheloai = (Theloai) spinner.getSelectedItem(); // Lấy đối tượng Theloai đã chọn từ Spinner
+
+                            // Kiểm tra các trường thông tin có được nhập đầy đủ hay không
+                            if (tenMonAn.isEmpty() || giaTienStr.isEmpty() || moTa.isEmpty()) {
+                                Toast.makeText(context, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+                                return; // Thoát khỏi sự kiện onClick
+                            }
+
+                            // Kiểm tra giá tiền có định dạng hợp lệ hay không
+                            int giaTien;
+                            try {
+                                giaTien = Integer.parseInt(giaTienStr);
+                            } catch (NumberFormatException e) {
+                                Toast.makeText(context, "Giá tiền không hợp lệ", Toast.LENGTH_SHORT).show();
+                                return; // Thoát khỏi sự kiện onClick
+                            }
+
+                            // Kiểm tra xem đã chọn hình ảnh mới hay chưa
+                            if (selectedImageUri == null) {
+                                Toast.makeText(context, "Vui lòng chọn hình ảnh", Toast.LENGTH_SHORT).show();
+                                return; // Thoát khỏi sự kiện onClick
+                            }
 
                             // Cập nhật thông tin món ăn trong CSDL
                             selectedMonAn.setTenMA(tenMonAn);

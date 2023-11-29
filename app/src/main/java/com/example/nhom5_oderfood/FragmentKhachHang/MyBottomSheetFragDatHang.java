@@ -99,7 +99,7 @@ public class MyBottomSheetFragDatHang extends BottomSheetDialogFragment {
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm - dd/MM/yyyy ");
         String formattedDate = dateFormat.format(currentDate);
         //mã hóa đơn
-        String randomString = generateRandomString(13);
+        String randomString = generateRandomString(10);
         btn_xacnhan.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {

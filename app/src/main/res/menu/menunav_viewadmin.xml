@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menuHOME"
+        android:icon="@drawable/iconhome"
+        android:title="Home" />
+    <item
+        android:id="@+id/menuHOADON"
+        android:icon="@drawable/invoice"
+        android:title="Hóa Đơn" />
+    <item
+        android:id="@+id/menuNHACUNGCAP"
+        android:icon="@drawable/parcel"
+        android:title="Nhà Cung Cấp" />
+
+    <item
+        android:id="@+id/menuCAIDAT"
+        android:icon="@drawable/logout"
+        android:title="Đăng xuất" />
+
+
+</menu>
