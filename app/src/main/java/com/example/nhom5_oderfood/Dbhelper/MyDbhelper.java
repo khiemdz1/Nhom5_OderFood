@@ -60,6 +60,10 @@ public class MyDbhelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO KhachHang VALUES (1,'admin','admin','Cấn Gia Khiêm',0372858655,'BinhPhu,ThachThat,HaNoi')");
 
         db.execSQL("Insert Into TheLoai values(1,'Đồ ăn'),(2,'Đồ uống')");
+
+        db.execSQL("Insert Into NhaCungCap values(1,'Ct Việt Hưng', 'Pizza', '0398045978', 'viethung2@gmail.com')");
+        db.execSQL("Insert Into NhaCungCap values(2,'Cửa hàng HY', 'Đồ uống có ga', '0937278238', 'hynguyen1998@gmail.com')");
+        db.execSQL("Insert Into NhaCungCap values(3,'NK Tiến Phát', 'Đồ ăn', '0366778940', 'tienphatlogistic@gmail.com')");
     }
 
     @Override
