@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:padding="5dp"
-                android:text="Thông tin"
+                android:text="Cung cấp:"
                 android:textSize="18dp" />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -119,7 +119,5 @@
                 </com.google.android.material.textfield.TextInputLayout>
             </com.google.android.material.textfield.TextInputLayout>
         </com.google.android.material.textfield.TextInputLayout>
-
-
     </LinearLayout>
 </LinearLayout>

@@ -1,28 +1,22 @@
-package com.example.nhom5_oderfood.Adapter;
+package com.example.nhom5_oderfood.AdapterAdmin;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.nhom5_oderfood.DAO.MonAnDAO;
 import com.example.nhom5_oderfood.DAO.NhaCungCapDAO;
-import com.example.nhom5_oderfood.DTO.MonAn;
 import com.example.nhom5_oderfood.DTO.NhaCungCap;
 
 import com.example.nhom5_oderfood.R;
-import com.example.nhom5_oderfood.databinding.DiaglogChucnangBinding;
 import com.example.nhom5_oderfood.databinding.ItemNhacungcapadminBinding;
 import com.google.android.material.textfield.TextInputEditText;
 

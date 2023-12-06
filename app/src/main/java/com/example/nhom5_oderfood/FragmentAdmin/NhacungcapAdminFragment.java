@@ -2,35 +2,29 @@ package com.example.nhom5_oderfood.FragmentAdmin;
 
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.Dialog;
-import android.content.DialogInterface;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 
-import android.telephony.PhoneNumberUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.Button;
 
-import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.nhom5_oderfood.Adapter.NhaCungCapAdminAdapter;
+import com.example.nhom5_oderfood.AdapterAdmin.NhaCungCapAdminAdapter;
 import com.example.nhom5_oderfood.DAO.NhaCungCapDAO;
 import com.example.nhom5_oderfood.DTO.NhaCungCap;
 
 import com.example.nhom5_oderfood.R;
 import com.example.nhom5_oderfood.databinding.FragmentNhacungcapBinding;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 
 
 import java.util.ArrayList;
